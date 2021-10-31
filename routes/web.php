@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +24,8 @@ Auth::routes(['verify' => true]);
 
 Route::group(['prefix'=>'admin','middleware'=>'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.home');
+
+    Route::resource('category',CategoryController::class);
 });
 
 

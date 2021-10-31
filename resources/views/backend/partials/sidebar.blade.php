@@ -22,6 +22,12 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a href="{{ route('category.index') }}" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Chuyên mục</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a href="{{ route('logout') }}" class='sidebar-link'
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="bi bi-grid-fill"></i>
