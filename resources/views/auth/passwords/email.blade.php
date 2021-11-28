@@ -2,7 +2,7 @@
 @section('title','Quên mật khẩu')
 @section('content')
     <h1 class="auth-title">Quên mật khẩu</h1>
-    <p class="auth-subtitle mb-5">Nhập email để chúng tôi gửi email đặt lại mật khẩu.</p>
+    <p class="auth-subtitle mb-5">Nhập email để gửi email đặt lại mật khẩu.</p>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

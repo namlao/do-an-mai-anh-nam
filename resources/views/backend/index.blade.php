@@ -1,9 +1,7 @@
 @extends('backend.layouts.master')
-
+@section('title','Tổng quan')
 @section('content')
-    <div class="page-heading">
-        <h3>Profile Statistics</h3>
-    </div>
+    @include('backend.partials.page-heading',['namepage'=>'Tổng quan'])
 {{--    <div class="page-content">--}}
 {{--        <section class="row">--}}
 {{--            <div class="col-12 col-lg-9">--}}
