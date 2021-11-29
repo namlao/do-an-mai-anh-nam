@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function () {
 
     Route::resource('category',CategoryController::class);
     Route::resource('product',ProductController::class);
+    Route::resource('slider',SlideController::class);
+    Route::resource('setting',SettingController::class);
 });
 
 
