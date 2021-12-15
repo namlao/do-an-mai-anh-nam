@@ -10,6 +10,16 @@
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                 </div>
             </div>
+
+        </div>
+        <div class="d-flex align-items-center info-user">
+            <div class="avatar avatar-xl">
+                <img src="{{ asset('').\Illuminate\Support\Facades\Auth::user()->avatar }}" alt="Face 1">
+            </div>
+            <div class="ms-3 name">
+                <h5 class="font-bold">{{\Illuminate\Support\Facades\Auth::user()->name}}</h5>
+                <h6 class="text-muted mb-0">{{\Illuminate\Support\Facades\Auth::user()->email}}</h6>
+            </div>
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
