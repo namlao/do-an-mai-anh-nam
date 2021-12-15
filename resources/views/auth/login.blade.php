@@ -16,7 +16,7 @@
         @csrf
         <div class="form-group position-relative has-icon-left mb-4">
             <input type="email" name="email" class="form-control form-control-xl @error('email') is-invalid @enderror"
-                   placeholder="Email" required autocomplete="off" autofocus value="{{ old('email') }}">
+                   placeholder="Email" required autocomplete="off" autofocus value="admin@email.com">
             <div class="form-control-icon">
                 <i class="bi bi-person"></i>
             </div>
@@ -24,7 +24,9 @@
         <div class="form-group position-relative has-icon-left mb-4">
             <input type="password" name="password"
                    class="form-control form-control-xl @error('password') is-invalid @enderror" placeholder="Password"
-                   required autocomplete="current-password">
+                   required autocomplete="current-password"
+                    value="123456789"
+            >
             <div class="form-control-icon">
                 <i class="bi bi-shield-lock"></i>
             </div>
