@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function () {
     Route::resource('product',ProductController::class);
     Route::resource('slider',SlideController::class);
     Route::resource('setting',SettingController::class);
+    Route::resource('user',UserController::class);
 });
 
 

@@ -100,6 +100,22 @@
                     </ul>
                 </li>
                 <li class="sidebar-title">Quản lý người dùng</li>
+                <li class="sidebar-item has-sub {{ request()->routeIs('user.*')?'active':'' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-stack"></i>
+                        <span>Thành viên</span>
+                    </a>
+                    <ul class="submenu {{ request()->routeIs('user.*')?'active':'' }}">
+
+                        <li class="submenu-item {{ request()->routeIs('user.index')?'active':'' }}">
+                            <a href="{{ route('user.index') }}">Danh sách thành viên</a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('user.create')?'active':'' }}">
+                            <a href="{{ route('user.create') }}">Thêm thành viên</a>
+                        </li>
+
+                    </ul>
+                </li>
                 <li class="sidebar-item">
                     <a href="{{ route('logout') }}" class='sidebar-link'
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
