@@ -29,7 +29,7 @@ class AddColumnAvatarDeletedAtAtUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('avater');
+            $table->dropColumn('avatar');
             $table->dropColumn('deleted_at');
         });
     }
