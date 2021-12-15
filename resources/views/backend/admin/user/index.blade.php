@@ -58,9 +58,9 @@
                                     <td>Admin</td>
                                     <td>
                                         @if(!is_null($user->email_verified_at))
-                                            <span class="badge badge-success">Active</span>
+                                            <span class="badge badge-success">Đã xác thực</span>
                                         @else
-                                            <span class="badge badge-danger">Verify</span>
+                                            <span class="badge badge-danger">Chưa xác thực</span>
                                         @endif
                                     </td>
                                     <td>
