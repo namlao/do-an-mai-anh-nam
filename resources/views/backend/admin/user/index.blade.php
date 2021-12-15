@@ -3,13 +3,17 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/simple-datatables/style.css') }}">
     <style>
-        .badge-success {
-            color: #fff;
-            background-color: #28a745;
+        .logo-user{
+            height: 100px;
+            width: 100px;
+            margin: 0 auto;
         }
-        .badge-danger {
-            color: #fff;
-            background-color: #dc3545;
+        .logo-user img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius:50% ;
+
         }
     </style>
 @endsection
@@ -51,16 +55,18 @@
                                 <tr>
                                     <td>{{$user->id}}</td>
                                     <td>
-                                        <img src="" alt="">
+                                        <div class="logo-user">
+                                            <img width="150" height="250" src="{{ url(''.$user->avatar) }}">
+                                        </div>
                                     </td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>Admin</td>
                                     <td>
                                         @if(!is_null($user->email_verified_at))
-                                            <span class="badge badge-success">Đã xác thực</span>
+                                            <span class="badge rounded-pill bg-success">Đã xác thực</span>
                                         @else
-                                            <span class="badge badge-danger">Chưa xác thực</span>
+                                            <span class="badge rounded-pill bg-danger">Chưa xác thực</span>
                                         @endif
                                     </td>
                                     <td>
