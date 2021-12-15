@@ -39,21 +39,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $category)
+                            @foreach($users as $user)
                             <tr>
-
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->slug}}</td>
+                                <td>{{$user->id}}</td>
                                 <td>
-                                    @foreach($category->ancestors as $item)
-                                        {{$item->name }}
-                                    @endforeach
+                                    <img src="" alt="">
                                 </td>
-
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>Admin</td>
                                 <td>
-                                    <a href="{{ route('category.edit',['category'=>$category->id]) }}" class="btn btn-primary">Sửa</a>
-                                    <form action="{{ route('category.destroy',['category'=>$category->id]) }}" method="POST" class="delete-form">
+                                    <a href="{{ route('user.edit',['user'=>$user->id]) }}" class="btn btn-primary">Sửa</a>
+                                    <form action="{{ route('user.destroy',['user'=>$user->id]) }}" method="POST" class="delete-form">
                                         @csrf
                                         {{ @method_field('DELETE') }}
                                         <button class="btn btn-danger">Xóa</button>

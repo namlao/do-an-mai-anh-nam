@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -10,11 +11,19 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
+    private $user;
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     public function index()
     {
         //
+        $users = $this->user->all();
+        return view('backend.admin.user.index',compact('users'));
 
     }
 
