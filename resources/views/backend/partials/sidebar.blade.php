@@ -113,9 +113,12 @@
                         <li class="submenu-item {{ request()->routeIs('user.create')?'active':'' }}">
                             <a href="{{ route('user.create') }}">Thêm thành viên</a>
                         </li>
-
+                        <li class="submenu-item">
+                            <a href="{{ route('user.restore') }}">Retore</a>
+                        </li>
                     </ul>
                 </li>
+
                 <li class="sidebar-item">
                     <a href="{{ route('logout') }}" class='sidebar-link'
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

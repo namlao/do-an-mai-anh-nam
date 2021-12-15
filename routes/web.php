@@ -41,6 +41,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function () {
     Route::resource('slider',SlideController::class);
     Route::resource('setting',SettingController::class);
     Route::resource('user',UserController::class);
+    Route::get('restore',function (){
+        \App\Models\User::withTrashed()->find(2)->restore();
+
+    })->name('user.restore');
 });
 
 
