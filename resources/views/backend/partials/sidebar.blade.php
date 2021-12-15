@@ -113,9 +113,7 @@
                         <li class="submenu-item {{ request()->routeIs('user.create')?'active':'' }}">
                             <a href="{{ route('user.create') }}">Thêm thành viên</a>
                         </li>
-                        <li class="submenu-item">
-                            <a href="{{ route('user.restore') }}">Retore</a>
-                        </li>
+
                     </ul>
                 </li>
 
