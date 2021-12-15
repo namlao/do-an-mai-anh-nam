@@ -3,7 +3,14 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/simple-datatables/style.css') }}">
     <style>
-
+        .badge-success {
+            color: #fff;
+            background-color: #28a745;
+        }
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
     </style>
 @endsection
 @section('js')
@@ -23,9 +30,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-{{--                    <div class="col-md-12">--}}
-{{--                        <a href="{{ route('category.create') }}" class="btn btn-primary">Thêm</a>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="col-md-12">--}}
+                    {{--                        <a href="{{ route('category.create') }}" class="btn btn-primary">Thêm</a>--}}
+                    {{--                    </div>--}}
                     <div class="col-md-12">
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
@@ -35,29 +42,38 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Quyền</th>
+                                <th>Xác thực</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($users as $user)
-                            <tr>
-                                <td>{{$user->id}}</td>
-                                <td>
-                                    <img src="" alt="">
-                                </td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>Admin</td>
-                                <td>
-                                    <a href="{{ route('user.edit',['user'=>$user->id]) }}" class="btn btn-primary">Sửa</a>
-                                    <form action="{{ route('user.destroy',['user'=>$user->id]) }}" method="POST" class="delete-form">
-                                        @csrf
-                                        {{ @method_field('DELETE') }}
-                                        <button class="btn btn-danger">Xóa</button>
-                                    </form>
+                                <tr>
+                                    <td>{{$user->id}}</td>
+                                    <td>
+                                        <img src="" alt="">
+                                    </td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>Admin</td>
+                                    <td>
+                                        @if(!is_null($user->email_verified_at))
+                                            <span class="badge badge-success">Active</span>
+                                        @else
+                                            <span class="badge badge-danger">Verify</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('user.edit',['user'=>$user->id]) }}" class="btn btn-primary">Sửa</a>
+                                        <form action="{{ route('user.destroy',['user'=>$user->id]) }}" method="POST"
+                                              class="delete-form">
+                                            @csrf
+                                            {{ @method_field('DELETE') }}
+                                            <button class="btn btn-danger">Xóa</button>
+                                        </form>
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>
