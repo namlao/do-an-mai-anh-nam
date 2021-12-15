@@ -42,8 +42,11 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function () {
     Route::resource('setting',SettingController::class);
     Route::resource('user',UserController::class);
     Route::get('restore',function (){
-        \App\Models\User::withTrashed()->find(2)->restore();
-
+//        \App\Models\User::withTrashed()->find(2)->restore();
+        $user = \App\Models\User::find(1);
+        $user->email_verified_at = '2021-12-15 23:48:52';
+        $user->update();
+        dd($user->email_verified_at);
     })->name('user.restore');
 });
 
