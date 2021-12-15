@@ -15,7 +15,7 @@ class AddColumnAvatarDeletedAtAtUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('avater');
+            $table->string('avatar')->nullable();
             $table->softDeletes();
         });
     }
