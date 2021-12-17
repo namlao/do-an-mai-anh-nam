@@ -21,18 +21,26 @@
                             <div class="form-group">
                                 <label for="feature_image">Ảnh background</label>
                                 <input type="file"
-                                       class="form-control"
+                                       class="form-control @error('img_slide_path') is-invalid @enderror"
                                        id="img_slide_path" name="img_slide_path" accept="image/*">
-
+                                @error('img_slide_path')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="basicInput">Title</label>
-                                <input type="text" class="form-control" id="title" name="title"
-                                       placeholder="Nhập title">
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
+                                       placeholder="Nhập title" value="{{old('title')}}">
+                                @error('title')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">Mô tả ngắn</label>
-                                <textarea class="form-control" name="description" rows="6" style="resize: none;"></textarea>
+                                <textarea class="form-control  @error('description') is-invalid @enderror" name="description" rows="6" style="resize: none;" maxlength="300" minlength="100">{{ old('description') }}</textarea>
+                                @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Hiển thị</label>

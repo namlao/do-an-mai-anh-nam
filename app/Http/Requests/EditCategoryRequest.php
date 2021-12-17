@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SettingRequest extends FormRequest
+class EditCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,19 +25,15 @@ class SettingRequest extends FormRequest
     {
         return [
             //
-            'config_name' => 'required',
-            'config_key' => 'required|unique:settings,config_key',
-            'config_value' => 'required',
+            'name' => 'required|unique:categories,name,'.$this->segments(4)[2].',id',
+
         ];
     }
     public function messages()
     {
         return [
-            'config_name.required' => 'Tên key là bắt buộc',
-            'config_key.required' => 'Key là bắt buộc',
-            'config_key.unique' => 'Key đã bị trùng',
-            'config_value.required' => 'Giá trị cần phải có'
-
+            'name.required' => 'Tên chuyên mục bắt buộc',
+            'name.unique' => 'Tên chuyện mục bị trùng'
         ];
     }
 }

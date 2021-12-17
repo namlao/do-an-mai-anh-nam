@@ -18,8 +18,11 @@
                             @csrf
                             <div class="form-group">
                                 <label for="basicInput">Tên chuyên mục</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                       placeholder="Nhập tên chuyên mục">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                                       placeholder="Nhập tên chuyên mục" value="{{ old('name') }}">
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                             <label for="basicInput">Chuyên mục cha</label>

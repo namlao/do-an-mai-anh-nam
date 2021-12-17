@@ -56,7 +56,7 @@
                                     <td>{{$user->id}}</td>
                                     <td>
                                         <div class="logo-user">
-                                            <img width="150" height="250" src="{{ url(''.$user->avatar) }}">
+                                            <img width="150" height="250" src="{{ url('').'/'.$user->avatar }}">
                                         </div>
                                     </td>
                                     <td>{{$user->name}}</td>

@@ -24,15 +24,18 @@
                             @method('put')
                             <div class="form-group">
                                 <label for="basicInput">Tên chuyên mục</label>
-                                <input type="text" class="form-control" id="name" name="name"
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                                        placeholder="Nhập tên chuyên mục" value="{{ $categoryItem->name }}">
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                             <label for="basicInput">Chuyên mục cha</label>
                             <select class="form-select" id="parent_id" name="parent_id">
                                 <option value="">Chọn chuyện mục</option>
                                 @foreach($categories as $category)
-                                    <option value="{{$category->id}}" @if($categoryItem->parent_id == $category->id) selected disabled @endif>{{$category->name}}</option>
+                                    <option value="{{$category->id}}" @if($categoryItem->parent_id == $category->id) selected @endif>{{$category->name}}</option>
                                 @endforeach
                             </select>
                             </div>

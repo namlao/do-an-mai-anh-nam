@@ -159,27 +159,36 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="cpu">CPU</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control @error('cpu') is-invalid @enderror"
                                                        id="cpu" name="cpu"
                                                        placeholder="Nhập thông tin CPU"
-                                                       value="{{ $product->attribute->cpu }}" required
+                                                       value="{{ $product->attribute->cpu }}"
                                                 >
+                                                @error('cpu')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="ram">RAM</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control @error('ram') is-invalid @enderror"
                                                        id="ram" name="ram"
                                                        placeholder="Nhập thông tin Ram"
-                                                       value="{{ $product->attribute->ram }}" required
+                                                       value="{{ $product->attribute->ram }}"
                                                 >
+                                                @error('ram')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="hard_drive">Ổ cứng</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control @error('hard_drive') is-invalid @enderror"
                                                        id="hard_drive" name="hard_drive"
                                                        placeholder="Nhập thông tin ổ cứng"
-                                                       value="{{ $product->attribute->hard_drive }}" required
+                                                       value="{{ $product->attribute->hard_drive }}"
                                                 >
+                                                @error('hard_drive')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="screen">Màn hình</label>
@@ -217,13 +226,16 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="os">Hệ điều hành</label>
-                                                <select name="os" id="os" class="form-select" required>
+                                                <select name="os" id="os" class="form-select @error('os') is-invalid @enderror">
                                                     <option value="">Hãy chọn hệ điều hành</option>
 {{--                                                    $product->attribute->os--}}
                                                     <option value="MacOs" @if($product->attribute->os == 'MacOs') selected @endif>Mac OS</option>
                                                     <option value="Windows" @if($product->attribute->os == 'Windows') selected @endif>Windown</option>
                                                     <option value="Ubuntu" @if($product->attribute->os == 'Ubuntu') selected @endif>Ubuntu</option>
                                                 </select>
+                                                @error('os')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="design">Thiết kế</label>
@@ -235,11 +247,14 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="weight">Khối lượng</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control @error('weight') is-invalid @enderror"
                                                        id="weight" name="weight"
                                                        placeholder="Nhập thông tin khối lượng"
                                                        value="{{ $product->attribute->weight }}"
                                                 >
+                                                @error('weight')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>

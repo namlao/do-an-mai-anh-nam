@@ -166,27 +166,36 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="cpu">CPU</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control @error('cpu') is-invalid @enderror"
                                                        id="cpu" name="cpu"
                                                        placeholder="Nhập thông tin CPU"
-                                                       value="{{ old('cpu') }}" required
+                                                       value="{{ old('cpu') }}"
                                                 >
+                                                @error('cpu')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="ram">RAM</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control @error('ram') is-invalid @enderror"
                                                        id="ram" name="ram"
                                                        placeholder="Nhập thông tin Ram"
-                                                       value="{{ old('ram') }}" required
+                                                       value="{{ old('ram') }}"
                                                 >
+                                                @error('ram')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="hard_drive">Ổ cứng</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control @error('hard_drive') is-invalid @enderror"
                                                        id="hard_drive" name="hard_drive"
                                                        placeholder="Nhập thông tin ổ cứng"
-                                                       value="{{ old('hard_drive') }}" required
+                                                       value="{{ old('hard_drive') }}"
                                                 >
+                                                @error('hard_drive')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="screen">Màn hình</label>
@@ -224,12 +233,15 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="os">Hệ điều hành</label>
-                                                <select name="os" id="os" class="form-select" required>
+                                                <select name="os" id="os" class="form-select @error('os') is-invalid @enderror">
                                                     <option value="">Hãy chọn hệ điều hành</option>
                                                     <option value="MacOs">Mac OS</option>
                                                     <option value="Windows">Windown</option>
                                                     <option value="Ubuntu">Ubuntu</option>
                                                 </select>
+                                                @error('os')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="design">Thiết kế</label>
@@ -241,11 +253,14 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="weight">Khối lượng</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control @error('weight') is-invalid @enderror"
                                                        id="weight" name="weight"
                                                        placeholder="Nhập thông tin khối lượng"
                                                        value="{{ old('weight') }}"
                                                 >
+                                                @error('weight')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
