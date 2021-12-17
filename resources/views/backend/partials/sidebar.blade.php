@@ -3,8 +3,9 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="{{ route('admin.home') }}"><img src="{{asset('backend/assets/images/logo/logo.png')}}" alt="Logo"
-                                              srcset=""></a>
+                    <a href="{{ route('admin.home') }}"><img src="{{asset('backend/assets/images/logo/logo.png')}}"
+                                                             alt="Logo"
+                                                             srcset=""></a>
                 </div>
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -14,7 +15,11 @@
         </div>
         <div class="d-flex align-items-center info-user">
             <div class="avatar avatar-xl">
-                <img src="{{ url('').'/'.\Illuminate\Support\Facades\Auth::user()->avatar }}" alt="Face 1">
+                @if(!is_null(\Illuminate\Support\Facades\Auth::user()->avatar))
+                    <img src="{{ url('').'/'.\Illuminate\Support\Facades\Auth::user()->avatar }}" alt="Face 1">
+                @else
+                    <img src="{{ url('backend/assets/images/faces/2.jpg') }}" alt="Face 1">
+                @endif
             </div>
             <div class="ms-3 name">
                 <h5 class="font-bold">{{\Illuminate\Support\Facades\Auth::user()->name}}</h5>

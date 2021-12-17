@@ -56,7 +56,11 @@
                                     <td>{{$user->id}}</td>
                                     <td>
                                         <div class="logo-user">
-                                            <img width="150" height="250" src="{{ url('').'/'.$user->avatar }}">
+                                            @if(!is_null($user->avatar))
+                                                <img width="150" height="250" src="{{ url('').'/'.$user->avatar }}">
+                                            @else
+                                                <img src="{{ url('backend/assets/images/faces/2.jpg') }}" alt="Face 1">
+                                            @endif
                                         </div>
                                     </td>
                                     <td>{{$user->name}}</td>
