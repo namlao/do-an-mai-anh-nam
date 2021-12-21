@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PermissionController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function () {
     Route::resource('slider',SlideController::class);
     Route::resource('setting',SettingController::class);
     Route::resource('user',UserController::class);
+    Route::resource('role',RoleController::class);
+
+    Route::get('permission',[PermissionController::class,'index'])->name('permission.index');
+    Route::post('permission',[PermissionController::class,'add'])->name('permission.add');
 
 });
 

@@ -131,7 +131,28 @@
 
                     </ul>
                 </li>
+                <li class="sidebar-item has-sub {{ request()->routeIs('role.*')?'active':'' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-stack"></i>
+                        <span>Vai trò</span>
+                    </a>
+                    <ul class="submenu {{ request()->routeIs('role.*')?'active':'' }}">
 
+                        <li class="submenu-item {{ request()->routeIs('role.index')?'active':'' }}">
+                            <a href="{{ route('role.index') }}">Danh sách Vai trò</a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('role.index')?'active':'' }}">
+                            <a href="{{ route('permission.index') }}">Thêm phân quyền</a>
+                        </li>
+{{--                        <li class="submenu-item {{ request()->routeIs('permission.index')?'active':'' }}">--}}
+{{--                            <a href="{{ route('permission.index') }}">Danh sách quyền</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="submenu-item {{ request()->routeIs('role.create')?'active':'' }}">--}}
+{{--                            <a href="{{ route('role.create') }}">Thêm vai trò</a>--}}
+{{--                        </li>--}}
+
+                    </ul>
+                </li>
                 <li class="sidebar-item">
                     <a href="{{ route('logout') }}" class='sidebar-link'
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\EditProductRequest;
-use App\Http\Requests\ProductRequest;
 use App\Models\Atributes;
 use App\Models\Category;
 use App\Models\Image;
