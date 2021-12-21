@@ -25,7 +25,7 @@ class EditRoleRequest extends FormRequest
     {
         return [
             //
-            'display_name' => 'required|unique:role,display_name,'.$this->segments(4)[2].',id',
+            'display_name' => 'required|unique:roles,display_name,'.$this->segments(4)[2].',id',
             'name' => 'required|unique:role,name,'.$this->segments(4)[2].',id',
             'description' => 'required',
         ];
