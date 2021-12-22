@@ -27,9 +27,7 @@ use Illuminate\Support\Facades\Auth;
 //Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
 //    ->name('ckfinder_browser');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\FontendController::class,'index'])->name('index');
 
 Auth::routes();
 Auth::routes(['verify' => true]);

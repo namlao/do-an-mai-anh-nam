@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddUserRequest;
+use App\Http\Requests\EditUserRequest;
 use App\Models\User;
 use Dropbox\Exception;
 use Illuminate\Http\Request;
@@ -10,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 
 class UserController extends Controller
@@ -20,6 +23,7 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     private $user;
+
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -29,7 +33,8 @@ class UserController extends Controller
     {
         //
         $users = $this->user->get();
-        return view('backend.admin.user.index',compact('users'));
+
+        return view('backend.admin.user.index', compact('users'));
 
     }
 
@@ -41,32 +46,33 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('backend.admin.user.add');
+        $roles = Role::all();
+        return view('backend.admin.user.add', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(AddUserRequest $request)
     {
         //
 
         try {
             DB::beginTransaction();
-            if($request->hasFile('avatar')){
+            if ($request->hasFile('avatar')) {
                 // Lấy thông tin file
                 $oldfile = $request->avatar;
 
                 // đường dẫn đến thư mục chứa file
                 $path = 'images/users/';
                 // đặt tên file: ten_product_random(10).<extension-file>
-                $fileName = Str::slug($request->name).'.'.$oldfile->getClientOriginalExtension();
+                $fileName = Str::slug($request->name) . '.' . $oldfile->getClientOriginalExtension();
                 //lưu file
                 $file = $request->file('avatar')->move($path, $fileName);
-            }else{
+            } else {
                 $file = null;
             }
 
@@ -76,20 +82,21 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
                 'avatar' => $file
             ];
-
-            $this->user->create($data);
+            $role = $request->role;
+            $user = $this->user->create($data); //$user->id
+            $user->assignRole($role);
             DB::commit();
             return redirect()->route('user.index');
-        }catch (Exception $e){
+        } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error: '.$e->getMessage().' Line: '.$e->getLine().' on file: '.$e->getFile());
+            Log::error('Error: ' . $e->getMessage() . ' Line: ' . $e->getLine() . ' on file: ' . $e->getFile());
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -100,40 +107,41 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
         $user = $this->user->find($id);
-        return view('backend.admin.user.edit',compact('user'));
+        $roles = Role::all();
+        return view('backend.admin.user.edit', compact('user', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
         //
         try {
             DB::beginTransaction();
             $user = $this->user->find($id);
-            if($request->hasFile('avatar')){
+            if ($request->hasFile('avatar')) {
                 // Lấy thông tin file
                 $oldfile = $request->avatar;
 
                 // đường dẫn đến thư mục chứa file
                 $path = 'images/users/';
                 // đặt tên file: ten_product_random(10).<extension-file>
-                $fileName = Str::slug($request->name).'.'.$oldfile->getClientOriginalExtension();
+                $fileName = Str::slug($request->name) . '.' . $oldfile->getClientOriginalExtension();
                 //lưu file
                 $file = $request->file('avatar')->move($path, $fileName);
-            }else{
+            } else {
                 $file = $user->avatar;
             }
             $data = [
@@ -141,17 +149,21 @@ class UserController extends Controller
                 'avatar' => $file
             ];
 
-            if ($request->changePassword == 'on'){
+            if ($request->changePassword == 'on') {
                 $data['password'] = Hash::make($request->password);
             }
 
+            $role = $request->role;
 
-            $this->user->find($id)->update($data);
+            $user = $this->user->find($id);
+            $user->update($data);
+            $user->syncRoles($role);
+
             DB::commit();
             return redirect()->route('user.index');
-        }catch (Exception $e){
+        } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error: '.$e->getMessage().' Line: '.$e->getLine().' on file: '.$e->getFile());
+            Log::error('Error: ' . $e->getMessage() . ' Line: ' . $e->getLine() . ' on file: ' . $e->getFile());
         }
 
     }
@@ -159,13 +171,16 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
         //
-        $this->user->find($id)->delete();
+        $user = $this->user->find($id);
+        $role = $user->getRoleNames();
+        $user -> removeRole($role[0]);
+        $user->delete();
         return redirect()->route('user.index');
     }
 }

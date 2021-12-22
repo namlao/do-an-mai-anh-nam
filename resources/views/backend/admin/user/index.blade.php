@@ -45,7 +45,7 @@
                                 <th>Avatar</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Quyền</th>
+                                <th>Vai trò</th>
                                 <th>Xác thực</th>
                                 <th>Action</th>
                             </tr>
@@ -65,7 +65,7 @@
                                     </td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>Admin</td>
+                                    <td>{{  $user->roles->implode('display_name', ', ') }}</td>
                                     <td>
                                         @if(!is_null($user->email_verified_at))
                                             <span class="badge rounded-pill bg-success">Đã xác thực</span>

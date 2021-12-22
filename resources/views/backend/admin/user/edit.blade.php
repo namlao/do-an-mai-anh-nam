@@ -31,7 +31,7 @@
     {{--    </script>--}}
 
     <script>
-        $('#changePasssword').click(function() {
+        $('#changePasssword').click(function () {
             if ($(this).is(':checked')) {
                 $('#password').removeAttr('readonly');
             } else {
@@ -67,27 +67,39 @@
                             </div>
                             <div class="form-group">
                                 <label for="basicInput">Tên thành viên</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                       placeholder="Nhập tên thành viên" value="{{ $user->name }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                                       name="name"
+                                       placeholder="Nhập tên thành viên">
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="basicInput">Email</label>
-                                <input type="text" class="form-control" id="email" name="email"
-                                       placeholder="Nhập email thành viên" disabled value="{{ $user->email }}">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                                       name="email"
+                                       placeholder="Nhập email thành viên">
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="basicInput">Password</label>
-                                <input type="checkbox" name="changePassword" id="changePasssword" > <span>Sửa mật khẩu</span>
-                                <input type="password" class="form-control" id="password" name="password"
-                                       placeholder="Nhập password" readonly>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                       id="password" name="password"
+                                       placeholder="Nhập password">
+                                @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="basicInput">Quyền thành viên</label>
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" aria-label="Default select example" name="role">
                                     <option>Chọn quyền</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->name }}"
+                                                @if($user->hasRole($role->name)) selected @endif>{{ $role->display_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
