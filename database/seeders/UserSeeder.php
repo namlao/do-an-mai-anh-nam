@@ -17,18 +17,31 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
-        \App\Models\User::create(
-//            [
-//                'name' => 'Mai Anh Nam',
-//                'email' => 'maianhnamdev@gmail.com',
-//                'password' => Hash::make('123456789')
-//            ],
+        $data = [
             [
                 'name' => 'admin',
                 'email' => 'admin@email.com',
                 'password' => Hash::make('123456789'),
+                'avatar' => 'images/users\admin.jpg',
                 'email_verified_at' => '2021-12-15 14:41:22'
-            ]
-        );
+            ],
+            [
+                'name' => 'Mai Anh Nam',
+                'email' => 'maianhnam@email.com',
+                'avatar' => 'images/users\nguyen-ha-viet.jpg',
+                'password' => Hash::make('123456789'),
+                'email_verified_at' => '2021-12-15 14:41:22'
+            ],
+            [
+                'name' => 'Nguyễn Hà Việt',
+                'email' => 'nguyenhaviet@email.com',
+                'avatar' => 'images/users\nguyen-ha-viet.jpg',
+                'password' => Hash::make('123456789'),
+                'email_verified_at' => '2021-12-15 14:41:22'
+            ],
+        ];
+        foreach ($data as $value){
+            \App\Models\User::create($value);
+        }
     }
 }

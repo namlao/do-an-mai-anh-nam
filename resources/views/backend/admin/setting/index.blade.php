@@ -48,14 +48,18 @@
                                     </td>
                                     <td>{{$setting->type}}</td>
                                     <td>
-                                        <a href="{{ route('setting.edit',['setting'=>$setting->id]).'?type='.$setting->type  }}"
-                                           class="btn btn-primary">Sửa</a>
-                                        <form action="{{ route('setting.destroy',['setting'=>$setting->id]) }}"
-                                              method="POST" class="delete-form">
-                                            @csrf
-                                            {{ @method_field('DELETE') }}
-                                            <button class="btn btn-danger">Xóa</button>
-                                        </form>
+                                        @can('setting edit')
+                                            <a href="{{ route('setting.edit',['setting'=>$setting->id]).'?type='.$setting->type  }}"
+                                               class="btn btn-primary">Sửa</a>
+                                        @endcan
+                                        @can('setting delete')
+                                            <form action="{{ route('setting.destroy',['setting'=>$setting->id]) }}"
+                                                  method="POST" class="delete-form">
+                                                @csrf
+                                                {{ @method_field('DELETE') }}
+                                                <button class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        @endcan
 
                                     </td>
                                 </tr>

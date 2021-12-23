@@ -16,6 +16,8 @@ class PermissionController extends Controller
     {
         $this->display_name = config('rolepermission.display_name');
         $this->action = config('rolepermission.action');
+        $this->middleware('auth');
+        $this->middleware(['role:admin']);
     }
 
     public function index()

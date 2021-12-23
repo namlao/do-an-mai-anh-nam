@@ -20,6 +20,8 @@ class SlideController extends Controller
     public function __construct(Slide $slide)
     {
         $this->slide = $slide;
+        $this->middleware('auth');
+        $this->middleware(['role:admin|content']);
     }
 
     /**

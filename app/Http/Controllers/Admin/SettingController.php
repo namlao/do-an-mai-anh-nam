@@ -18,6 +18,8 @@ class SettingController extends Controller
     public function __construct(Setting $setting)
     {
         $this->setting = $setting;
+        $this->middleware('auth');
+        $this->middleware(['role:admin|content']);
     }
 
     /**
@@ -49,7 +51,7 @@ class SettingController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(EditSettingRequest $request)
+    public function store(AddSettingRequest $request)
     {
         //
 
@@ -115,7 +117,7 @@ class SettingController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(SettingRequest $request, $id)
+    public function update(EditSettingRequest $request, $id)
     {
         //
         if($request->type == 'image'){

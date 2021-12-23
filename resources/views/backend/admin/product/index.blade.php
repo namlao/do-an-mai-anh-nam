@@ -49,15 +49,18 @@
                                     <td>{{$product->category->name }}</td>
                                     <td>{{ number_format($product->price, 0, ',', '.') }} VND</td>
                                     <td>
-                                        <a href="{{ route('product.edit',['product'=>$product->id]) }}"
-                                           class="btn btn-primary">Sửa</a>
-                                        <form action="{{ route('product.destroy',['product'=>$product->id]) }}"
-                                              method="POST" class="delete-form">
-                                            @csrf
-                                            {{ @method_field('DELETE') }}
-                                            <button class="btn btn-danger">Xóa</button>
-                                        </form>
-
+                                        @can('product edit')
+                                            <a href="{{ route('product.edit',['product'=>$product->id]) }}"
+                                               class="btn btn-primary">Sửa</a>
+                                        @endcan
+                                        @can('product delete')
+                                            <form action="{{ route('product.destroy',['product'=>$product->id]) }}"
+                                                  method="POST" class="delete-form">
+                                                @csrf
+                                                {{ @method_field('DELETE') }}
+                                                <button class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

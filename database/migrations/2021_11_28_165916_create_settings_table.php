@@ -17,7 +17,7 @@ class CreateSettingsTable extends Migration
             $table->id();
             $table->string('config_name');
             $table->string('config_key');
-            $table->string('config_value');
+            $table->text('config_value');
             $table->string('type')->default('text');
             $table->softDeletes();
             $table->timestamps();

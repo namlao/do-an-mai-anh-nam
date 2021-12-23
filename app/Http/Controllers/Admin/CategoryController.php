@@ -16,6 +16,8 @@ class CategoryController extends Controller
     private $category;
     public function __construct(Category $category)
     {
+        $this->middleware('auth');
+        $this->middleware(['role:admin|content']);
         $this->category = $category;
     }
 

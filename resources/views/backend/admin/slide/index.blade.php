@@ -7,6 +7,7 @@
             color: #fff;
             background-color: #28a745;
         }
+
         .badge-danger {
             color: #fff;
             background-color: #dc3545;
@@ -60,13 +61,18 @@
                                     </td>
 
                                     <td>
-                                        <a href="{{ route('slider.edit',['slider'=>$slide->id]) }}" class="btn btn-primary">Sửa</a>
-                                        <form action="{{ route('slider.destroy',['slider'=>$slide->id]) }}" method="POST" class="delete-form">
-                                            @csrf
-                                            {{ @method_field('DELETE') }}
-                                            <button class="btn btn-danger">Xóa</button>
-                                        </form>
-
+                                        @can('slide edit')
+                                            <a href="{{ route('slider.edit',['slider'=>$slide->id]) }}"
+                                               class="btn btn-primary">Sửa</a>
+                                        @endcan
+                                        @can('slide delete')
+                                            <form action="{{ route('slider.destroy',['slider'=>$slide->id]) }}"
+                                                  method="POST" class="delete-form">
+                                                @csrf
+                                                {{ @method_field('DELETE') }}
+                                                <button class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

@@ -5,34 +5,40 @@
             <!-- BEGIN TOP BAR LEFT PART -->
             <div class="col-md-6 col-sm-6 additional-shop-info">
                 <ul class="list-unstyled list-inline">
-                    <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
-                    <!-- BEGIN CURRENCIES -->
-                    <li class="shop-currencies">
-                        <a href="javascript:void(0);">€</a>
-                        <a href="javascript:void(0);">£</a>
-                        <a href="javascript:void(0);" class="current">$</a>
+                    <li>
+                        <i class="fa fa-phone"></i><span>{{ \App\Helpers\getConfigSetting::getConfigValue('phone') }}</span>
                     </li>
-                    <!-- END CURRENCIES -->
-                    <!-- BEGIN LANGS -->
-                    <li class="langs-block">
-                        <a href="javascript:void(0);" class="current">English </a>
-                        <div class="langs-block-others-wrapper"><div class="langs-block-others">
-                                <a href="javascript:void(0);">French</a>
-                                <a href="javascript:void(0);">Germany</a>
-                                <a href="javascript:void(0);">Turkish</a>
-                            </div></div>
+                    <li>
+                        <i class="fa fa-envelope"></i><span>{{ \App\Helpers\getConfigSetting::getConfigValue('email') }}</span>
                     </li>
-                    <!-- END LANGS -->
+                    <li>
+                        <i class="fa fa-map-marker"></i><span>{{ \App\Helpers\getConfigSetting::getConfigValue('address') }}</span>
+                    </li>
                 </ul>
             </div>
             <!-- END TOP BAR LEFT PART -->
             <!-- BEGIN TOP BAR MENU -->
             <div class="col-md-6 col-sm-6 additional-nav">
                 <ul class="list-unstyled list-inline pull-right">
-                    <li><a href="shop-account.html">My Account</a></li>
+                    <li>
+                        @if(\Illuminate\Support\Facades\Auth::check() == 1)
+                            Xin chào <a
+                                href="shop-account.html">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
+                        @endif
+                    </li>
                     <li><a href="shop-wishlist.html">My Wishlist</a></li>
                     <li><a href="shop-checkout.html">Checkout</a></li>
-                    <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                    @if(\Illuminate\Support\Facades\Auth::check() == 1)
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        >Đăng xuất</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    @else
+                        <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                    @endif
+
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->

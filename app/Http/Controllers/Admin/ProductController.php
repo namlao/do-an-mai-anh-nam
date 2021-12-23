@@ -32,6 +32,8 @@ class ProductController extends Controller
         $this->tag = $tag;
         $this->image = $image;
         $this->atribute = $atribute;
+        $this->middleware('auth');
+        $this->middleware(['role:admin|content']);
     }
 
     /**

@@ -3,16 +3,17 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/simple-datatables/style.css') }}">
     <style>
-        .logo-user{
+        .logo-user {
             height: 100px;
             width: 100px;
             margin: 0 auto;
         }
-        .logo-user img{
+
+        .logo-user img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius:50% ;
+            border-radius: 50%;
 
         }
     </style>
@@ -74,14 +75,18 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('user.edit',['user'=>$user->id]) }}" class="btn btn-primary">Sửa</a>
-                                        <form action="{{ route('user.destroy',['user'=>$user->id]) }}" method="POST"
-                                              class="delete-form">
-                                            @csrf
-                                            {{ @method_field('DELETE') }}
-                                            <button class="btn btn-danger">Xóa</button>
-                                        </form>
-
+                                        @can('user edit')
+                                            <a href="{{ route('user.edit',['user'=>$user->id]) }}"
+                                               class="btn btn-primary">Sửa</a>
+                                        @endcan
+                                        @can('user delete')
+                                            <form action="{{ route('user.destroy',['user'=>$user->id]) }}" method="POST"
+                                                  class="delete-form">
+                                                @csrf
+                                                {{ @method_field('DELETE') }}
+                                                <button class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

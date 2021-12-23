@@ -23,9 +23,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-{{--                    <div class="col-md-12">--}}
-{{--                        <a href="{{ route('category.create') }}" class="btn btn-primary">Thêm</a>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="col-md-12">--}}
+                    {{--                        <a href="{{ route('category.create') }}" class="btn btn-primary">Thêm</a>--}}
+                    {{--                    </div>--}}
                     <div class="col-md-12">
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
@@ -34,32 +34,38 @@
                                 <th>Name</th>
                                 <th>Slug</th>
                                 <th>Chuyên mục cha</th>
+
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($categories as $category)
-                            <tr>
+                                <tr>
 
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->slug}}</td>
-                                <td>
-                                    @foreach($category->ancestors as $item)
-                                        {{$item->name }}
-                                    @endforeach
-                                </td>
+                                    <td>{{$category->id}}</td>
+                                    <td>{{$category->name}}</td>
+                                    <td>{{$category->slug}}</td>
+                                    <td>
+                                        @foreach($category->ancestors as $item)
+                                            {{$item->name }}
+                                        @endforeach
+                                    </td>
 
-                                <td>
-                                    <a href="{{ route('category.edit',['category'=>$category->id]) }}" class="btn btn-primary">Sửa</a>
-                                    <form action="{{ route('category.destroy',['category'=>$category->id]) }}" method="POST" class="delete-form">
-                                        @csrf
-                                        {{ @method_field('DELETE') }}
-                                        <button class="btn btn-danger">Xóa</button>
-                                    </form>
-
-                                </td>
-                            </tr>
+                                    <td>
+                                        @can('category edit')
+                                            <a href="{{ route('category.edit',['category'=>$category->id]) }}"
+                                               class="btn btn-primary">Sửa</a>
+                                        @endcan
+                                        @can('category delete')
+                                            <form action="{{ route('category.destroy',['category'=>$category->id]) }}"
+                                                  method="POST" class="delete-form">
+                                                @csrf
+                                                {{ @method_field('DELETE') }}
+                                                <button class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        @endcan
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>

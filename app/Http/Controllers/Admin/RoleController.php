@@ -13,10 +13,15 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 
-
 class RoleController extends Controller
 {
 
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(['role:admin|manager-member']);
+    }
 
     /**
      * Display a listing of the resource.
@@ -27,7 +32,7 @@ class RoleController extends Controller
     {
 
         $roles = Role::all();
-        return view('backend.admin.role.index',compact('roles'));
+        return view('backend.admin.role.index', compact('roles'));
     }
 
     /**
@@ -39,13 +44,13 @@ class RoleController extends Controller
     {
         //
         $permissions = Permission::all();
-        return view('backend.admin.role.add',compact('permissions'));
+        return view('backend.admin.role.add', compact('permissions'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(AddRoleRequest $request)
@@ -66,9 +71,9 @@ class RoleController extends Controller
             DB::commit();
             return redirect()->route('role.index');
 
-        }catch (\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Error: '.$e->getMessage().' Line: '.$e->getLine().' on file: '.$e->getFile());
+            Log::error('Error: ' . $e->getMessage() . ' Line: ' . $e->getLine() . ' on file: ' . $e->getFile());
         }
 
     }
@@ -76,7 +81,7 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -87,7 +92,7 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
@@ -96,14 +101,14 @@ class RoleController extends Controller
         $role = Role::find($id);
         $permissions = Permission::all();
         $roleSelecteds = $role->getPermissionNames();
-        return view('backend.admin.role.edit',compact('role','permissions','roleSelecteds'));
+        return view('backend.admin.role.edit', compact('role', 'permissions', 'roleSelecteds'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
@@ -125,16 +130,16 @@ class RoleController extends Controller
             DB::commit();
             return redirect()->route('role.index');
 
-        }catch (\Exception $e ){
+        } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Error: '.$e->getMessage().' Line: '.$e->getLine().' on file: '.$e->getFile());
+            Log::error('Error: ' . $e->getMessage() . ' Line: ' . $e->getLine() . ' on file: ' . $e->getFile());
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
