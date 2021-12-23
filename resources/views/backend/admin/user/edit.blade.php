@@ -69,33 +69,39 @@
                                 <label for="basicInput">Tên thành viên</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                                        name="name"
-                                       placeholder="Nhập tên thành viên">
+                                       placeholder="Nhập tên thành viên" value="{{$user->name}}">
                                 @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="basicInput">Email</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
+{{--                                @error('email') is-invalid @enderror--}}
+                                <input type="email" class="form-control" id="email"
                                        name="email"
-                                       placeholder="Nhập email thành viên">
-                                @error('email')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                       placeholder="Nhập email thành viên" value="{{$user->email}}" disabled>
+{{--                                @error('email')--}}
+{{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--                                @enderror--}}
                             </div>
                             <div class="form-group">
                                 <label for="basicInput">Password</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                <div class="d-inline-block">
+                                    <input type="checkbox" value="changePasssword" id="changePasssword">
+                                    <label for="basicInput">Sửa mật khẩu</label>
+                                </div>
+{{--                                @error('password') is-invalid @enderror--}}
+                                <input type="password" class="form-control"
                                        id="password" name="password"
-                                       placeholder="Nhập password">
-                                @error('password')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                       placeholder="Nhập password" readonly>
+{{--                                @error('password')--}}
+{{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--                                @enderror--}}
                             </div>
                             <div class="form-group">
-                                <label for="basicInput">Quyền thành viên</label>
+                                <label for="basicInput">Vai trò</label>
                                 <select class="form-select" aria-label="Default select example" name="role">
-                                    <option>Chọn quyền</option>
+                                    <option value="">Chọn vai trò</option>
                                     @foreach($roles as $role)
                                         <option value="{{ $role->name }}"
                                                 @if($user->hasRole($role->name)) selected @endif>{{ $role->display_name }}</option>

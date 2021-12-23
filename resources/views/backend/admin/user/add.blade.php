@@ -47,10 +47,12 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="basicInput">Quyền thành viên</label>
+                                <label for="basicInput">Vai trò</label>
                                 <select class="form-select" aria-label="Default select example" name="role">
+                                    <option value="">Chọn vai trò</option>
                                     @foreach($roles as $role)
                                         <option value="{{ $role->name }}">{{ $role->display_name }}</option>
+
                                     @endforeach
                                 </select>
                             </div>

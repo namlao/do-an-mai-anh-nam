@@ -1,4 +1,4 @@
-@extends('fontend.layouts.master')
+@extends('frontend.layouts.master')
 @section('title','Trang chủ')
 
 @section('css')
@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-@include('fontend.partials.slide')
+@include('frontend.partials.slide')
 
 <div class="main">
     <div class="container">

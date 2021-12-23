@@ -56,7 +56,7 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(AddUserRequest $request)
+    public function store(Request $request)
     {
         //
 
@@ -83,6 +83,9 @@ class UserController extends Controller
                 'avatar' => $file
             ];
             $role = $request->role;
+            if (is_null($role)){
+                $role = 'guest';
+            }
             $user = $this->user->create($data); //$user->id
             $user->assignRole($role);
             DB::commit();
@@ -125,7 +128,7 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(EditUserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
         try {
@@ -154,6 +157,9 @@ class UserController extends Controller
             }
 
             $role = $request->role;
+            if (is_null($role)){
+                $role = 'guest';
+            }
 
             $user = $this->user->find($id);
             $user->update($data);
@@ -179,7 +185,9 @@ class UserController extends Controller
         //
         $user = $this->user->find($id);
         $role = $user->getRoleNames();
-        $user -> removeRole($role[0]);
+        if(is_null($role)){
+            $user -> removeRole($role);
+        }
         $user->delete();
         return redirect()->route('user.index');
     }
