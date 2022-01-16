@@ -140,6 +140,18 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="description">Mô tả ngắn sản phẩm</label>
+                                        <textarea name="short_description" id="short_description" cols="30" rows="5"
+                                                  class="form-control @error('short_description') is-invalid @enderror">
+                                                {!! $product->short_description !!}
+
+                                        </textarea>
+                                        @error('short_description')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+
+                                    </div>
+                                    <div class="form-group">
                                         <label for="description">Mô tả sản phẩm</label>
                                         <textarea name="description" id="description" cols="30" rows="10"
                                                   class="ckeditor @error('description') is-invalid @enderror">
@@ -253,6 +265,40 @@
                                                        value="{{ $product->attribute->weight }}"
                                                 >
                                                 @error('weight')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="quantity">Số lượng</label>
+                                                <input type="number"
+                                                       class="form-control @error('quantity') is-invalid @enderror"
+                                                       id="quantity" name="quantity"
+                                                       placeholder="Nhập thông tin số lượng"
+                                                       value="{{ $product->quantity }}"
+                                                >
+                                                @error('quantity')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label for="who_made">Năm sản xuất</label>
+                                                <select name="when_made" id="when_made"
+                                                        class="form-select @error('when_made') is-invalid @enderror">
+                                                    <option value="">Hãy chọn thời gian sản xuất</option>
+                                                    <option value="2020_2022" @if($product->when_made == '2020_2022') selected @endif>2020-2022</option>
+                                                    <option value="2010_2019" @if($product->when_made == '2010_2019') selected @endif>2010-2019</option>
+                                                    <option value="2003_2009" @if($product->when_made == '2003_2009') selected @endif>2003-2009</option>
+                                                    <option value="before_2003" @if($product->when_made == 'before_2003') selected @endif>Trước 2003</option>
+                                                    <option value="2000_2002" @if($product->when_made == '2000_2002') selected @endif>2000-2002</option>
+
+
+                                                </select>
+                                                @error('when_made')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>

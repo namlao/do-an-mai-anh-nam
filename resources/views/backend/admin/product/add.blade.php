@@ -114,7 +114,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="image">Hình ảnh chi tiết sản phẩm</label>
-                                        <input type="file" name="image_detail[]" id="image" class="form-control" accept="image/*"
+                                        <input type="file" name="image_detail[]" id="image" class="form-control"
+                                               accept="image/*"
                                                multiple/>
                                     </div>
                                     <div class="row form-group">
@@ -141,10 +142,24 @@
                                                 <label for="basicInput">Tags</label>
                                                 <select class="form-select js-example-tokenizer" id="tag" name="tags[]"
                                                         multiple>
-
+                                                    @foreach($tags as $tag)
+                                                        <option value="{{ $tag->slug }}" >{{ $tag->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Mô tả ngắn sản phẩm</label>
+                                        <textarea name="short_description" id="short_description" cols="30" rows="5"
+                                                  class="form-control @error('short_description') is-invalid @enderror">
+                                                {{ old('short_description') }}
+
+                                        </textarea>
+                                        @error('short_description')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Mô tả sản phẩm</label>
@@ -166,7 +181,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="cpu">CPU</label>
-                                                <input type="text" class="form-control @error('cpu') is-invalid @enderror"
+                                                <input type="text"
+                                                       class="form-control @error('cpu') is-invalid @enderror"
                                                        id="cpu" name="cpu"
                                                        placeholder="Nhập thông tin CPU"
                                                        value="{{ old('cpu') }}"
@@ -177,7 +193,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="ram">RAM</label>
-                                                <input type="text" class="form-control @error('ram') is-invalid @enderror"
+                                                <input type="text"
+                                                       class="form-control @error('ram') is-invalid @enderror"
                                                        id="ram" name="ram"
                                                        placeholder="Nhập thông tin Ram"
                                                        value="{{ old('ram') }}"
@@ -188,7 +205,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="hard_drive">Ổ cứng</label>
-                                                <input type="text" class="form-control @error('hard_drive') is-invalid @enderror"
+                                                <input type="text"
+                                                       class="form-control @error('hard_drive') is-invalid @enderror"
                                                        id="hard_drive" name="hard_drive"
                                                        placeholder="Nhập thông tin ổ cứng"
                                                        value="{{ old('hard_drive') }}"
@@ -213,6 +231,7 @@
                                                        value="{{ old('graphic_card') }}"
                                                 >
                                             </div>
+
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -233,7 +252,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="os">Hệ điều hành</label>
-                                                <select name="os" id="os" class="form-select @error('os') is-invalid @enderror">
+                                                <select name="os" id="os"
+                                                        class="form-select @error('os') is-invalid @enderror">
                                                     <option value="">Hãy chọn hệ điều hành</option>
                                                     <option value="MacOs">Mac OS</option>
                                                     <option value="Windows">Windown</option>
@@ -253,12 +273,46 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="weight">Khối lượng</label>
-                                                <input type="text" class="form-control @error('weight') is-invalid @enderror"
+                                                <input type="text"
+                                                       class="form-control @error('weight') is-invalid @enderror"
                                                        id="weight" name="weight"
                                                        placeholder="Nhập thông tin khối lượng"
                                                        value="{{ old('weight') }}"
                                                 >
                                                 @error('weight')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="quantity">Số lượng</label>
+                                                <input type="number"
+                                                       class="form-control @error('quantity') is-invalid @enderror"
+                                                       id="quantity" name="quantity"
+                                                       placeholder="Nhập thông tin số lượng"
+                                                       value="{{ old('quantity') }}"
+                                                >
+                                                @error('quantity')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label for="who_made">Năm sản xuất</label>
+                                                <select name="when_made" id="when_made"
+                                                        class="form-select @error('when_made') is-invalid @enderror">
+                                                    <option value="">Hãy chọn thời gian sản xuất</option>
+                                                    <option value="2020_2022">2020-2022</option>
+                                                    <option value="2010_2019">2010-2019</option>
+                                                    <option value="2003_2009">2003-2009</option>
+                                                    <option value="before_2003">Trước 2003</option>
+                                                    <option value="2000_2002">2000-2002</option>
+
+                                                </select>
+                                                @error('when_made')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>

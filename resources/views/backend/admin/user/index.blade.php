@@ -42,7 +42,7 @@
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th width="50">#</th>
                                 <th>Avatar</th>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -76,17 +76,22 @@
                                     </td>
                                     <td>
                                         @can('user edit')
+                                            {{--                                        @if(auth()->user()->name == $user->name)--}}
                                             <a href="{{ route('user.edit',['user'=>$user->id]) }}"
-                                               class="btn btn-primary">Sửa</a>
+                                               class="btn btn-primary"><i class="fas fa-wrench"></i></a>
+                                            {{--                                        @endif--}}
                                         @endcan
-                                        @can('user delete')
-                                            <form action="{{ route('user.destroy',['user'=>$user->id]) }}" method="POST"
-                                                  class="delete-form">
-                                                @csrf
-                                                {{ @method_field('DELETE') }}
-                                                <button class="btn btn-danger">Xóa</button>
-                                            </form>
-                                        @endcan
+                                        @if(!$user->hasrole('admin'))
+                                            @can('user delete')
+                                                <form action="{{ route('user.destroy',['user'=>$user->id]) }}"
+                                                      method="POST"
+                                                      class="delete-form">
+                                                    @csrf
+                                                    {{ @method_field('DELETE') }}
+                                                    <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                                </form>
+                                            @endcan
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

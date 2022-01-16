@@ -2,6 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\EtsyApiAuthencation;
+use App\Http\Middleware\LogedIn;
+use App\Http\Middleware\LogedOut;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -21,6 +24,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        LogedIn::class,
+        LogedOut::class
     ];
 
     /**
@@ -37,12 +42,15 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
         ],
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            EtsyApiAuthencation::class
+
         ],
     ];
 
@@ -63,6 +71,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'etsy' => EtsyApiAuthencation::class,
+        'LogIn' => LogedIn::class
+
     ];
 }

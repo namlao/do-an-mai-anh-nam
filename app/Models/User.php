@@ -24,7 +24,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'avatar'
+        'avatar',
+        'etsy_key',
+        'etsy_secret'
     ];
 
     /**
@@ -45,4 +47,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function customer(){
+        return $this->hasOne(Customer::class,'user_id','id');
+    }
 }

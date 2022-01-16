@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         $this->user = $user;
         $this->middleware('auth');
-        $this->middleware(['role:admin|member-manager']);
+        $this->middleware(['role:admin|member-manager|content|']);
     }
 
     public function index()

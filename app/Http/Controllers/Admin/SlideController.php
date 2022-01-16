@@ -105,7 +105,9 @@ class SlideController extends Controller
     public function edit($id)
     {
         //
+
         $slide = $this->slide->find($id);
+
         return view('backend.admin.slide.edit',compact('slide'));
     }
 
@@ -118,13 +120,12 @@ class SlideController extends Controller
      */
     public function update(EditSlideRequest $request, $id)
     {
-
         if(is_null($request->display)){
             $display = 0;
         }else{
             $display = 1;
         }
-
+        $slide = Slide::find($id);
         if($request->hasFile('img_slide_path')){
             // Lấy thông tin file
             $oldfile = $request->img_slide_path;
@@ -135,7 +136,7 @@ class SlideController extends Controller
             //lưu file
             $file = $request->file('img_slide_path')->move($path, $fileName);
         }else{
-            $file = null;
+            $file = $slide->img_slide_path;
         }
         $data = [
             'title' => $request->title,

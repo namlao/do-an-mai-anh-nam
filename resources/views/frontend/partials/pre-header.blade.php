@@ -27,16 +27,15 @@
                         @endif
                     </li>
                     <li><a href="shop-wishlist.html">My Wishlist</a></li>
-                    <li><a href="shop-checkout.html">Checkout</a></li>
+                    <li><a href="{{ route('cart.checkout') }}">Thanh toán</a></li>
                     @if(\Illuminate\Support\Facades\Auth::check() == 1)
-                        <a href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        >Đăng xuất</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
+{{--                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"--}}
+                        <a href="{{ route('customer.logout') }}">Đăng xuất</a>
+{{--                        <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" class="d-none">--}}
+{{--                            @csrf--}}
+{{--                        </form>--}}
                     @else
-                        <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                        <li><a href="{{ route('customer.login') }}">Đăng nhập</a></li>
                     @endif
 
                 </ul>

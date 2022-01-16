@@ -25,7 +25,7 @@ class EditSlideRequest extends FormRequest
     {
         return [
             //
-            'img_slide_path' => 'required|image',
+            'img_slide_path' => 'image',
             'title' => 'required',
             'description' => 'required|min:100|max:300',
         ];
@@ -33,7 +33,6 @@ class EditSlideRequest extends FormRequest
     public function messages()
     {
         return[
-            'img_slide_path.required' => 'Ảnh slide phải bắt buộc',
             'img_slide_path.image' => 'Ảnh slide không đúng định dạng',
             'title.required' => 'Title phải bắt buộc',
             'description.required' => 'Mô tả ngắn phải bắt buộc',

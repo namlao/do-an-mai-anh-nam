@@ -38,7 +38,7 @@
                 <li class="sidebar-title">Quản lý sản phẩm</li>
                 <li class="sidebar-item has-sub {{ request()->routeIs('category.*')?'active':'' }}">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="fa fa-folder"></i>
                         <span>Chuyên mục</span>
                     </a>
                     <ul class="submenu {{ request()->routeIs('category.*')?'active':'' }}">
@@ -57,7 +57,7 @@
                 </li>
                 <li class="sidebar-item has-sub {{ request()->routeIs('product.*')?'active':'' }}">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="bi bi-basket"></i>
                         <span>Sản phẩm</span>
                     </a>
                     <ul class="submenu {{ request()->routeIs('product.*')?'active':'' }}">
@@ -74,31 +74,66 @@
 
                     </ul>
                 </li>
+
+                {{--                <li class="sidebar-item has-sub {{ request()->routeIs('storage.*')?'active':'' }}">--}}
+                {{--                    <a href="#" class='sidebar-link'>--}}
+                {{--                        <i class="bi bi-stack"></i>--}}
+                {{--                        <span>Kho</span>--}}
+                {{--                    </a>--}}
+                {{--                    <ul class="submenu {{ request()->routeIs('storage.*')?'active':'' }}">--}}
+                {{--                        <li class="submenu-item {{ request()->routeIs('storage.index')?'active':'' }}">--}}
+                {{--                            <a href="{{ route('storage.index') }}">Danh sách sản phẩm trong kho</a>--}}
+                {{--                        </li>--}}
+                {{--                        <li class="submenu-item {{ request()->routeIs('product.create')?'active':'' }}">--}}
+                {{--                            <a href="{{ route('storage.create') }}">Thêm sản phẩm vào kho</a>--}}
+                {{--                        </li>--}}
+
+                {{--                    </ul>--}}
+                {{--                </li>--}}
+
+                {{--                <li class="sidebar-item has-sub {{ request()->routeIs('etsy.*')?'active':'' }}">--}}
+                {{--                    <a href="#" class='sidebar-link'>--}}
+                {{--                        <i class="bi bi-stack"></i>--}}
+                {{--                        <span>Sản phẩm etsy</span>--}}
+                {{--                    </a>--}}
+                {{--                    <ul class="submenu ">--}}
+                {{--                        --}}{{--                        <li class="submenu-item ">--}}
+                {{--                        --}}{{--                            <a href="{{ route('etsy.connect') }}">Kết nối etsy</a>--}}
+                {{--                        --}}{{--                        </li>--}}
+                {{--                        <li class="submenu-item {{ request()->routeIs('etsy.index')?'active':'' }}">--}}
+                {{--                            <a href="{{route('etsy.index')}}">Danh sách sản phẩm</a>--}}
+                {{--                        </li>--}}
+                {{--                        --}}{{--                        <li class="submenu-item {{ request()->routeIs('etsy.index')?'active':'' }}">--}}
+                {{--                        --}}{{--                            <a href="">Thêm sản phẩm</a>--}}
+                {{--                        --}}{{--                        </li>--}}
+
+                {{--                    </ul>--}}
+                {{--                </li>--}}
                 @endrole
 
                 @role('admin|content')
-                    <li class="sidebar-title">Quản lý nội dụng</li>
-                    <li class="sidebar-item has-sub {{ request()->routeIs('slider.*')?'active':'' }}">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-stack"></i>
-                            <span>Slide</span>
-                        </a>
-                        <ul class="submenu {{ request()->routeIs('slider.*')?'active':'' }}">
-                            @can('slide list')
-                                <li class="submenu-item {{ request()->routeIs('slider.index')?'active':'' }}">
-                                    <a href="{{ route('slider.index') }}">Danh sách slide</a>
-                                </li>
-                            @endcan
-                            @can('slide add')
-                                <li class="submenu-item {{ request()->routeIs('slider.create')?'active':'' }}">
-                                    <a href="{{ route('slider.create') }}">Thêm sản slide</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </li>
-                    <li class="sidebar-item has-sub {{ request()->routeIs('setting.*')?'active':'' }}">
+                <li class="sidebar-title">Quản lý nội dụng</li>
+                <li class="sidebar-item has-sub {{ request()->routeIs('slider.*')?'active':'' }}">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="fas fa-sliders-h"></i>
+                        <span>Slide</span>
+                    </a>
+                    <ul class="submenu {{ request()->routeIs('slider.*')?'active':'' }}">
+                        @can('slide list')
+                            <li class="submenu-item {{ request()->routeIs('slider.index')?'active':'' }}">
+                                <a href="{{ route('slider.index') }}">Danh sách slide</a>
+                            </li>
+                        @endcan
+                        @can('slide add')
+                            <li class="submenu-item {{ request()->routeIs('slider.create')?'active':'' }}">
+                                <a href="{{ route('slider.create') }}">Thêm sản slide</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+                <li class="sidebar-item has-sub {{ request()->routeIs('setting.*')?'active':'' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fas fa-cogs"></i>
                         <span>Setting</span>
                     </a>
                     <ul class="submenu {{ request()->routeIs('setting.*')?'active':'' }}">
@@ -128,11 +163,32 @@
                 </li>
                 @endrole
 
-                @role('member-manager|admin')
-                    <li class="sidebar-title">Quản lý người dùng</li>
-                    <li class="sidebar-item has-sub {{ request()->routeIs('user.*')?'active':'' }}">
+                <li class="sidebar-title">Quản lý hóa dơn</li>
+{{--                <li class="sidebar-item {{ request()->routeIs('bill.*')?'active':'' }}">--}}
+{{--                    <a href="{{route('bill.customer') }}" class='sidebar-link'>--}}
+{{--                        <i class="bi bi-stack"></i>--}}
+{{--                        <span>Quản lý khách hàng</span>--}}
+{{--                    </a>--}}
+
+{{--                </li>--}}
+                <li class="sidebar-item has-sub {{ request()->routeIs('bill.*')?'active':'' }}">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
+                        <i class="fas fa-money-bill"></i>
+                        <span>Quản lý hóa đơn</span>
+                    </a>
+                    <ul class="submenu {{ request()->routeIs('bill.*')?'active':'' }}">
+                            <li class="submenu-item {{ request()->routeIs('bill.index')?'active':'' }}">
+                                <a href="{{ route('bill.index') }}">Danh sách hóa đơn</a>
+                            </li>
+                    </ul>
+
+                </li>
+
+                @role('member-manager|admin|content')
+                <li class="sidebar-title">Quản lý người dùng</li>
+                <li class="sidebar-item has-sub {{ request()->routeIs('user.*')?'active':'' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fas fa-users"></i>
                         <span>Thành viên</span>
                     </a>
                     <ul class="submenu {{ request()->routeIs('user.*')?'active':'' }}">
@@ -149,35 +205,37 @@
 
                     </ul>
                 </li>
-                    @role('admin')
-                        <li class="sidebar-item has-sub {{ request()->routeIs('role.*')?'active':'' }}">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-stack"></i>
-                            <span>Vai trò</span>
-                        </a>
-                        <ul class="submenu {{ request()->routeIs('role.*')?'active':'' }}">
 
-                            <li class="submenu-item {{ request()->routeIs('role.index')?'active':'' }}">
-                                <a href="{{ route('role.index') }}">Danh sách Vai trò</a>
-                            </li>
-                            <li class="submenu-item {{ request()->routeIs('role.index')?'active':'' }}">
-                                <a href="{{ route('permission.index') }}">Thêm phân quyền</a>
-                            </li>
-                            {{--                        <li class="submenu-item {{ request()->routeIs('permission.index')?'active':'' }}">--}}
-                            {{--                            <a href="{{ route('permission.index') }}">Danh sách quyền</a>--}}
-                            {{--                        </li>--}}
-                            {{--                        <li class="submenu-item {{ request()->routeIs('role.create')?'active':'' }}">--}}
-                            {{--                            <a href="{{ route('role.create') }}">Thêm vai trò</a>--}}
-                            {{--                        </li>--}}
 
-                        </ul>
-                    </li>
-                    @endrole
+                @role('admin')
+                <li class="sidebar-item has-sub {{ request()->routeIs('role.*')?'active':'' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fas fa-user-tag"></i>
+                        <span>Vai trò</span>
+                    </a>
+                    <ul class="submenu {{ request()->routeIs('role.*')?'active':'' }}">
+
+                        <li class="submenu-item {{ request()->routeIs('role.index')?'active':'' }}">
+                            <a href="{{ route('role.index') }}">Danh sách Vai trò</a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('role.index')?'active':'' }}">
+                            <a href="{{ route('permission.index') }}">Thêm phân quyền</a>
+                        </li>
+                        {{--                        <li class="submenu-item {{ request()->routeIs('permission.index')?'active':'' }}">--}}
+                        {{--                            <a href="{{ route('permission.index') }}">Danh sách quyền</a>--}}
+                        {{--                        </li>--}}
+                        {{--                        <li class="submenu-item {{ request()->routeIs('role.create')?'active':'' }}">--}}
+                        {{--                            <a href="{{ route('role.create') }}">Thêm vai trò</a>--}}
+                        {{--                        </li>--}}
+
+                    </ul>
+                </li>
+                @endrole
                 @endrole
                 <li class="sidebar-item">
                     <a href="{{ route('logout') }}" class='sidebar-link'
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="bi bi-grid-fill"></i>
+                        <i class="fas fa-power-off"></i>
                         <span>Đăng xuất</span>
                     </a>
 

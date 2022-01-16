@@ -54,14 +54,14 @@
                                     <td>
                                         @can('category edit')
                                             <a href="{{ route('category.edit',['category'=>$category->id]) }}"
-                                               class="btn btn-primary">Sửa</a>
+                                               class="btn btn-primary"><i class="fas fa-wrench"></i></a>
                                         @endcan
                                         @can('category delete')
                                             <form action="{{ route('category.destroy',['category'=>$category->id]) }}"
                                                   method="POST" class="delete-form">
                                                 @csrf
                                                 {{ @method_field('DELETE') }}
-                                                <button class="btn btn-danger">Xóa</button>
+                                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                             </form>
                                         @endcan
                                     </td>

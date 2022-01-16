@@ -98,6 +98,7 @@
 {{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
 {{--                                @enderror--}}
                             </div>
+                            @role('admin|member-manager')
                             <div class="form-group">
                                 <label for="basicInput">Vai trò</label>
                                 <select class="form-select" aria-label="Default select example" name="role">
@@ -108,6 +109,7 @@
                                     @endforeach
                                 </select>
                             </div>
+                            @endrole
                             <div class="form-group">
                                 <label for="basicInput">Tình trạng</label>
                                 @if(!is_null($user->email_verified_at))

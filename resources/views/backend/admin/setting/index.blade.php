@@ -25,12 +25,12 @@
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Tên cấu hình</th>
-                                <th>Key cấu hình</th>
+                                <th width="50">#</th>
+                                <th width="150">Tên cấu hình</th>
+                                <th width="150">Key cấu hình</th>
                                 <th>Giá trị</th>
                                 <th>Type</th>
-                                <th>Action</th>
+                                <th width="100">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -50,14 +50,14 @@
                                     <td>
                                         @can('setting edit')
                                             <a href="{{ route('setting.edit',['setting'=>$setting->id]).'?type='.$setting->type  }}"
-                                               class="btn btn-primary">Sửa</a>
+                                               class="btn btn-primary"><i class="fas fa-wrench"></i></a>
                                         @endcan
                                         @can('setting delete')
                                             <form action="{{ route('setting.destroy',['setting'=>$setting->id]) }}"
                                                   method="POST" class="delete-form">
                                                 @csrf
                                                 {{ @method_field('DELETE') }}
-                                                <button class="btn btn-danger">Xóa</button>
+                                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                             </form>
                                         @endcan
 

@@ -2,6 +2,7 @@
 <div class="brands">
     <div class="container">
         <div class="owl-carousel owl-carousel6-brands">
+
             <a href="shop-product-list.html"><img src="{{asset('frontend/assets/pages/img/brands/canon.jpg')}}" alt="canon" title="canon"></a>
             <a href="shop-product-list.html"><img src="{{asset('frontend/assets/pages/img/brands/esprit.jpg')}}" alt="esprit" title="esprit"></a>
             <a href="shop-product-list.html"><img src="{{asset('frontend/assets/pages/img/brands/gap.jpg')}}" alt="gap" title="gap"></a>

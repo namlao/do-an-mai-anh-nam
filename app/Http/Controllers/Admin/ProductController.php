@@ -90,7 +90,10 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'category_id' => $request->category,
                 'description' => $request->description,
-                'image_feature_path' => $file
+                'short_description' => $request->short_description,
+                'image_feature_path' => $file,
+                'quantity' => $request->quantity,
+                'when_made' => $request->when_made,
             ];
 //        dd($data);
             $product = $this->product->create($data);
@@ -168,6 +171,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
+
+
         $product = $this->product->find($id);
 //        dd($product->image_feature_path);
         $categories = $this->category->get();
@@ -186,8 +191,10 @@ class ProductController extends Controller
     public function update(EditProductRequest $request, $id)
     {
         //
+
         try {
             DB::beginTransaction();
+            $product = $this->product->find($id);
 
             // Xử lý trong bảng product
             // Xử lý ảnh đại diện
@@ -201,14 +208,17 @@ class ProductController extends Controller
                 //lưu file
                 $file = $request->file('feature_image')->move($path, $fileName);
             }else{
-                $file = null;
+                $file = $product->image_feature_path;
             }
             $data = [
                 'name' => $request->name,
                 'price' => $request->price,
                 'category_id' => $request->category,
                 'description' => $request->description,
-                'image_feature_path' => $file
+                'short_description' => $request->short_description,
+                'image_feature_path' => $file,
+                'quantity' => $request->quantity,
+                'when_made' => $request->when_made,
             ];
 //        dd($data);
             $product = $this->product->find($id)->update($data);
@@ -224,7 +234,13 @@ class ProductController extends Controller
             }
             $product->tags()->sync($tagIds);
 
+
+
             // Xử lý ảnh chi tiết
+
+
+//            dd($imgOld[0]->id);
+
             if (!empty($request->image_detail)){
                 foreach ($request->image_detail as $imageItem){
                     $pathItem = 'images/products/'.Auth::user()->id;
@@ -237,7 +253,9 @@ class ProductController extends Controller
                 }
 
             }else{
-                $imgIds = null;
+                foreach ($product->images->all() as $test){
+                    $imgIds[] =  $test->id ;
+                }
             }
             $product->images()->sync($imgIds);
 

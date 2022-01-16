@@ -26,31 +26,35 @@ class EditProductRequest extends FormRequest
         return [
             //
             'name' => 'required',
-            'feature_image' =>'required',
             'price' => 'required|numeric',
             'category' => 'required',
             'description' => 'required',
+            'short_description' => 'required',
             'cpu' => 'required',
             'ram' => 'required',
             'hard_drive' => 'required',
             'os' => 'required',
             'weight' => 'required|numeric',
+            'quantity' => 'required',
+            'when_made' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'feature_image.required' => 'Bắt buộc phải có ảnh đại diện sản phẩm',
             'name.required' => 'Bắt buộc phải có tên sản phẩm',
             'price.required' => 'Bắt buộc phải có giá sản phẩm',
             'price.numeric' => 'Giá sản phẩm phải là số',
             'category.required' => 'Hãy chọn chuyên mục',
             'description.required' => 'Mô tả sản phẩm không được để trống',
+            'short_description.required' => 'Mô tả sản phẩm không được để trống',
             'cpu.required' => 'CPU phải có',
             'ram.required' => 'Ram phải có',
             'hard_drive.required' => 'Ổ cứng phải có',
             'os.required' => 'Hệ điều hành phải có',
             'weight.required' => 'Khối lượng phải có',
+            'quantity.required' => 'Số lượng phải có',
+            'when_made.required' => 'Thời gian sản xuất phải có',
             'weight.numeric' => 'Khối lượng phải là số',
         ];
     }

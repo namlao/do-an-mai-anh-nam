@@ -35,11 +35,11 @@
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th width="50">#</th>
                                 <th>Ảnh</th>
                                 <th>Title</th>
                                 <th>Mô tả ngắn</th>
-                                <th>Hiển thị</th>
+                                <th width="100">Hiển thị</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -63,14 +63,14 @@
                                     <td>
                                         @can('slide edit')
                                             <a href="{{ route('slider.edit',['slider'=>$slide->id]) }}"
-                                               class="btn btn-primary">Sửa</a>
+                                               class="btn btn-primary"><i class="fas fa-wrench"></i></a>
                                         @endcan
                                         @can('slide delete')
                                             <form action="{{ route('slider.destroy',['slider'=>$slide->id]) }}"
                                                   method="POST" class="delete-form">
                                                 @csrf
                                                 {{ @method_field('DELETE') }}
-                                                <button class="btn btn-danger">Xóa</button>
+                                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                             </form>
                                         @endcan
                                     </td>

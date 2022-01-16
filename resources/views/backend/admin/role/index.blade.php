@@ -54,11 +54,11 @@
 
 
                                     <td>
-                                        <a href="{{ route('role.edit',['role'=>$role->id]) }}" class="btn btn-primary">Sửa</a>
+                                        <a href="{{ route('role.edit',['role'=>$role->id]) }}" class="btn btn-primary"><i class="fas fa-wrench"></i></a>
                                         <form action="{{ route('role.destroy',['role'=>$role->id]) }}" method="POST" class="delete-form">
                                             @csrf
                                             {{ @method_field('DELETE') }}
-                                            <button class="btn btn-danger">Xóa</button>
+                                            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                         </form>
 
                                     </td>
