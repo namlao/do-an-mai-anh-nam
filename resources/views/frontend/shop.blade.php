@@ -1,24 +1,27 @@
-
 @extends('frontend.layouts.master')
 @section('title','Shop')
 
 @section('css')
-    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
+    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet"
+          type="text/css"><!-- for slider-range -->
     <style>
         .pi-img-wrapper {
             height: 130px;
         }
-        .pi-img-wrapper img{
+
+        .pi-img-wrapper img {
             object-fit: contain;
             height: 100%;
+            margin: 0 auto;
         }
     </style>
 @endsection
 
 @section('js')
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"
+            type="text/javascript"></script><!-- for slider-range -->
     <script type="text/javascript">
-        jQuery(document).ready(function() {
+        jQuery(document).ready(function () {
             // Layout.init();
             Layout.initOWL();
             Layout.initTwitter();
@@ -27,36 +30,60 @@
             Layout.initUniform();
             Layout.initSliderRange();
         });
-        function showAjax(value) {
-            $.ajax({
-                url:"{{ url('').'/shop' }}"+value,
-                type:'get',
-                data:{
-                    'show':value
-                },
-                success:function (data){
-                    console.log(data)
-                    // $('#result').html(data)
-                }
-            })
-        }
 
+        //ajax sort with shop
+        $('#sort').on('change',function (e) {
+            console.log(e)
+            var sort = e.target.value;
+            $.get('sort/'+sort,function (data) {
+                $('#ajaxProduct').html(data)
+            });
+        })
+
+        //ajax show shop
+        $('#showShop').on('change',function (e) {
+            console.log(e)
+            var show = e.target.value;
+            $.get('showShop/'+show,function (data) {
+                $('#ajaxProduct').html(data)
+            })
+        })
+
+
+        //ajax filter quantity shop
+        $('.filter-stock').on('click',function (e) {
+            var filterShop = e.target.value;
+            $.get('filterStockShop/'+filterShop,function (data) {
+                $('#ajaxProduct').html(data)
+            })
+        })
+
+        //filter price shop
+        $('.filter-price').on('click',function (e) {
+            var filterShop = e.target.value;
+            $.get('filterPriceShop/'+filterShop,function (data) {
+                $('#ajaxProduct').html(data)
+                // alert(data)
+            })
+        })
     </script>
 @endsection
 
 @section('content')
     <div class="title-wrapper">
-        <div class="container"><div class="container-inner">
+        <div class="container">
+            <div class="container-inner">
                 <h1>Shop</h1>
                 {{--            <em>Over 4000 Items are available here</em>--}}
-            </div></div>
+            </div>
+        </div>
     </div>
 
     <div class="main">
         <div class="container">
             <ul class="breadcrumb">
                 <li><a href="{{ url('') }}">Home</a></li>
-                <li><a href="{{ route('shop')  }}">Store</a></li>
+                <li><a href="{{ route('shop')  }}">Cửa hàng</a></li>
             </ul>
             <!-- BEGIN SIDEBAR & CONTENT -->
             <div class="row margin-bottom-40">
@@ -70,48 +97,55 @@
                         </div>
                         <div class="col-md-10 col-sm-10">
                             <div class="pull-right">
-                                <label class="control-label">Show:</label>
-                                <select class="form-control input-sm" onchange="showAjax(value)">
-                                    <option value="?limit=1" selected="selected">1</option>
-                                    <option value="?limit=24">24</option>
-                                    <option value="?limit=25">25</option>
-                                    <option value="?limit=50">50</option>
-                                    <option value="?limit=75">75</option>
-                                    <option value="?limit=100">100</option>
-                                </select>
+                                <label class="control-label">Hiển thị:</label>
+
+                                    <select class="form-control input-sm" id="showShop">
+                                        <option value="">Chọn</option>
+                                        <option value="2">2</option>
+                                        <option value="16">16</option>
+                                        <option value="32">32</option>
+                                        <option value="48">48</option>
+                                        <option value="64">64</option>
+                                        <option value="80">80</option>
+                                    </select>
+                                <span>Sản phẩm</span>
+
                             </div>
                             <div class="pull-right">
-                                <label class="control-label">Sort&nbsp;By:</label>
-                                <select class="form-control input-sm">
-                                    <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
-                                    <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-                                    <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                                    <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-                                    <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-                                    <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
-                                    <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
-                                    <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
-                                    <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
+                                <label class="control-label">Sắp xếp theo:</label>
+                                <select class="form-control input-sm" id="sort">
+                                    <option value="" selected="selected">Chọn
+                                    </option>
+                                    <option value="name_asc">Name (A - Z)</option>
+                                    <option value="name_desc">Name (Z - A)</option>
+                                    <option value="price_asc">Price (Low &gt; High)</option>
+                                    <option value="price_desc">Price (High &gt; Low)</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <!-- BEGIN PRODUCT LIST -->
-                    <div class="row product-list">
+
+                    <div class="row product-list"  id="ajaxProduct">
                     @foreach($products as $product)
                         <!-- PRODUCT ITEM START -->
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="product-item">
                                     <div class="pi-img-wrapper">
-                                        <img src="{{ url($product->image_feature_path) }}" class="img-responsive" alt="Berry Lace Dress">
+                                        <img src="{{ url($product->image_feature_path) }}" class="img-responsive"
+                                             alt="Berry Lace Dress">
                                         <div>
-                                            <a href="{{ url($product->image_feature_path) }}" class="btn btn-default fancybox-button">Zoom</a>
-                                            <a href="#product-pop-up-{{$product->id}}" class="btn btn-default fancybox-fast-view">View</a>
+                                            <a href="{{ url($product->image_feature_path) }}"
+                                               class="btn btn-default fancybox-button">Zoom</a>
+                                            <a href="#product-pop-up-{{$product->id}}"
+                                               class="btn btn-default fancybox-fast-view">View</a>
                                         </div>
                                     </div>
-                                    <h3><a href="{{ route('item',['id' => $product->id]) }}">{{ $product->name }}</a></h3>
+                                    <h3><a href="{{ route('item',['id' => $product->id]) }}">{{ $product->name }}</a>
+                                    </h3>
                                     <div class="pi-price">{{ number_format($product->price, 0, ',', '.') }} VND</div>
-                                    <a href="{{ route('cart.add',['id' => $product->id]) }}" class="btn btn-default add2cart">Thêm vào giỏ</a>
+                                    <a href="{{ route('cart.add',['id' => $product->id]) }}"
+                                       class="btn btn-default add2cart">Thêm vào giỏ</a>
                                 </div>
                                 <div id="product-pop-up-{{$product->id}}" style="display: none; width: 700px;">
                                     <div class="product-page product-pop-up">
@@ -144,10 +178,14 @@
                                                     <div class="product-page-cart">
                                                         <div class="product-quantity">
                                                             <input id="product-quantity" type="text" value="1" readonly
-                                                                   name="product-quantity" class="form-control input-sm">
+                                                                   name="product-quantity"
+                                                                   class="form-control input-sm">
                                                         </div>
-                                                        <a class="btn btn-primary" href="{{ route('cart.add',['id' => $product->id]) }}">Thêm vào giỏ</a>
-                                                        <a href="{{ route('item',['id' => $product->id]) }}" class="btn btn-default">Chi tiết</a>
+                                                        <a class="btn btn-primary"
+                                                           href="{{ route('cart.add',['id' => $product->id]) }}">Thêm
+                                                            vào giỏ</a>
+                                                        <a href="{{ route('item',['id' => $product->id]) }}"
+                                                           class="btn btn-default">Chi tiết</a>
                                                     </div>
                                                 </div>
 

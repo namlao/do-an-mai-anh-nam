@@ -24,7 +24,6 @@ class CreateAtributesTable extends Migration
             $table->string('special')->nullable(); // tính năng khác
             $table->string('os')->nullable(); // hệ điều hành
             $table->string('design')->nullable(); // thiết kế
-            $table->string('weight')->nullable(); // trọng lượng
             $table->bigInteger('product_id')->unsigned()->index();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('CASCADE');
             $table->timestamps();

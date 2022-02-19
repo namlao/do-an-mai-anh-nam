@@ -1,0 +1,18 @@
+<Request><Product><ItemId>234234234</ItemId>
+
+    <Skus>
+
+      <Sku>
+
+        <SkuId>234</SkuId>
+
+        <SellerSku>api-create-test-1</SellerSku>
+
+        <Status>active</Status>
+
+          <Images></Images>
+
+        </Sku>
+      </Skus>
+    </Product>
+  </Request>

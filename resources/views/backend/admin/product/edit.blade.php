@@ -9,10 +9,14 @@
         button:focus {
             outline: none;
         }
-        .img-product{
+
+        .img-product {
             width: 150px;
             height: 250px;
             object-fit: cover;
+        }
+        .product-require{
+            color: red;
         }
     </style>
 @endsection
@@ -44,7 +48,15 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="{{ route('product.update',['product'=>$product->id]) }}" method="post" enctype="multipart/form-data">
+                        @if(session()->exists('lazada'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('lazada') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-md-12">
+                        <form action="{{ route('product.update',['product'=>$product->id]) }}" method="post"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             <nav>
@@ -59,16 +71,26 @@
                                             data-bs-target="#detail-description" type="button" role="tab"
                                             aria-controls="detail-description" aria-selected="false">Mô tả chi tiết
                                     </button>
+                                    <button class="nav-link" id="nav-delivery-warranty-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#delivery-warranty" type="button" role="tab"
+                                            aria-controls="delivery-warranty" aria-selected="false">Vận chuyển và bảo
+                                        hành
+                                    </button>
                                 </div>
                             </nav>
                             <div class="tab-content mt-3" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="general-description" role="tabpanel"
                                      aria-labelledby="nav-general_description-tab">
+                                    <div><p>(<span class="product-require">*</span>) Bắt buộc</p></div>
+
                                     <div class="form-group">
                                         <div class="text-center">
-                                            <img width="150" src="{{ url($product->image_feature_path) }}" class="img-thumbnail">
+                                            <img width="150" src="{{ url($product->image_feature_path) }}"
+                                                 class="img-thumbnail">
                                         </div>
-                                        <label for="feature_image">Ảnh đại diện</label>
+                                        <label for="feature_image">Ảnh đại diện<span
+                                                class="product-require">*</span></label>
                                         <input type="file"
                                                class="form-control @error('feature_image') is-invalid @enderror"
                                                id="feature_image" name="feature_image" accept="image/*">
@@ -78,7 +100,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Tên sản phẩm</label>
+                                        <label for="name">Tên sản phẩm<span class="product-require">*</span></label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                                id="name" name="name"
                                                placeholder="Nhập tên sản phẩm"
@@ -88,7 +110,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="price">Giá</label>
+                                        <label for="price">Giá<span class="product-require">*</span></label>
                                         <input type="text" class="form-control @error('price') is-invalid @enderror"
                                                id="price" name="price"
                                                placeholder="Nhập giá sản phẩm"
@@ -105,21 +127,24 @@
                                             @endforeach
                                         </div>
                                         <label for="image">Hình ảnh chi tiết sản phẩm</label>
-                                        <input type="file" name="image_detail[]" id="image" class="form-control" accept="image/*"
+                                        <input type="file" name="image_detail[]" id="image" class="form-control"
+                                               accept="image/*"
                                                multiple/>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="category">Chuyên mục cha</label>
+                                                <label for="category">Chuyên mục<span
+                                                        class="product-require">*</span></label>
                                                 <select class="form-select @error('category') is-invalid @enderror"
                                                         id="category" name="category">
                                                     <option value="">Chọn chuyện mục</option>
-                                                    @foreach($categories as $category)
-                                                        <option
-                                                            value="{{ $category->id }}"
-                                                            @if($product->category_id == $category->id) selected @endif>{{ $category->name }}</option>
-                                                    @endforeach
+                                                    {{--                                                    @foreach($categories as $category)--}}
+                                                    {{--                                                        <option--}}
+                                                    {{--                                                            value="{{ $category->id }}"--}}
+                                                    {{--                                                            @if($product->category_id == $category->id) selected @endif>{{ $category->name }}</option>--}}
+                                                    {{--                                                    @endforeach--}}
+                                                    {{ \App\Helpers\RecursiveCategory::showEditProductCategories($categories,$product->category_id) }}
 
                                                 </select>
                                                 @error('category')
@@ -129,18 +154,34 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="basicInput">Tags</label>
-                                                <select class="form-select js-example-tokenizer" id="tag" name="tags[]"
-                                                        multiple>
-                                                    @foreach($product->tags as $tag)
-                                                        <option value="{{ $tag->slug }}" selected>{{ $tag->name }}</option>
+                                                <label for="basicInput">Thương hiệu<span
+                                                        class="product-require">*</span></label>
+                                                <select class="form-select js-brands" id="brand" name="brand"
+                                                >
+                                                    <option value=""></option>
+
+                                                    @foreach($brands as $brand)
+                                                        <option
+                                                            value="{{ $brand->id }}" {{ $brand->id == $product->brand->id ? 'selected' : ''}}>{{ $brand->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
+                                        {{--                                        <div class="col-md-6">--}}
+                                        {{--                                            <div class="form-group">--}}
+                                        {{--                                                <label for="basicInput">Tags</label>--}}
+                                        {{--                                                <select class="form-select js-example-tokenizer" id="tag" name="tags[]"--}}
+                                        {{--                                                        multiple>--}}
+                                        {{--                                                    @foreach($product->tags as $tag)--}}
+                                        {{--                                                        <option value="{{ $tag->slug }}" selected>{{ $tag->name }}</option>--}}
+                                        {{--                                                    @endforeach--}}
+                                        {{--                                                </select>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                        </div>--}}
                                     </div>
                                     <div class="form-group">
-                                        <label for="description">Mô tả ngắn sản phẩm</label>
+                                        <label for="description">Mô tả ngắn sản phẩm<span
+                                                class="product-require">*</span></label>
                                         <textarea name="short_description" id="short_description" cols="30" rows="5"
                                                   class="form-control @error('short_description') is-invalid @enderror">
                                                 {!! $product->short_description !!}
@@ -152,7 +193,8 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <label for="description">Mô tả sản phẩm</label>
+                                        <label for="description">Mô tả sản phẩm<span
+                                                class="product-require">*</span></label>
                                         <textarea name="description" id="description" cols="30" rows="10"
                                                   class="ckeditor @error('description') is-invalid @enderror">
                                                 {{ $product->description }}
@@ -167,11 +209,13 @@
                                 </div>
                                 <div class="tab-pane fade" id="detail-description" role="tabpanel"
                                      aria-labelledby="nav-detail-description-tab">
+                                    <div><p>(<span class="product-require">*</span>) Bắt buộc</p></div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="cpu">CPU</label>
-                                                <input type="text" class="form-control @error('cpu') is-invalid @enderror"
+                                                <input type="text"
+                                                       class="form-control @error('cpu') is-invalid @enderror"
                                                        id="cpu" name="cpu"
                                                        placeholder="Nhập thông tin CPU"
                                                        value="{{ $product->attribute->cpu }}"
@@ -182,7 +226,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="ram">RAM</label>
-                                                <input type="text" class="form-control @error('ram') is-invalid @enderror"
+                                                <input type="text"
+                                                       class="form-control @error('ram') is-invalid @enderror"
                                                        id="ram" name="ram"
                                                        placeholder="Nhập thông tin Ram"
                                                        value="{{ $product->attribute->ram }}"
@@ -193,7 +238,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="hard_drive">Ổ cứng</label>
-                                                <input type="text" class="form-control @error('hard_drive') is-invalid @enderror"
+                                                <input type="text"
+                                                       class="form-control @error('hard_drive') is-invalid @enderror"
                                                        id="hard_drive" name="hard_drive"
                                                        placeholder="Nhập thông tin ổ cứng"
                                                        value="{{ $product->attribute->hard_drive }}"
@@ -238,12 +284,22 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="os">Hệ điều hành</label>
-                                                <select name="os" id="os" class="form-select @error('os') is-invalid @enderror">
+                                                <select name="os" id="os"
+                                                        class="form-select @error('os') is-invalid @enderror">
                                                     <option value="">Hãy chọn hệ điều hành</option>
-{{--                                                    $product->attribute->os--}}
-                                                    <option value="MacOs" @if($product->attribute->os == 'MacOs') selected @endif>Mac OS</option>
-                                                    <option value="Windows" @if($product->attribute->os == 'Windows') selected @endif>Windown</option>
-                                                    <option value="Ubuntu" @if($product->attribute->os == 'Ubuntu') selected @endif>Ubuntu</option>
+                                                    {{--                                                    $product->attribute->os--}}
+                                                    <option value="MacOs"
+                                                            @if($product->attribute->os == 'MacOs') selected @endif>Mac
+                                                        OS
+                                                    </option>
+                                                    <option value="Windows"
+                                                            @if($product->attribute->os == 'Windows') selected @endif>
+                                                        Windown
+                                                    </option>
+                                                    <option value="Ubuntu"
+                                                            @if($product->attribute->os == 'Ubuntu') selected @endif>
+                                                        Ubuntu
+                                                    </option>
                                                 </select>
                                                 @error('os')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -258,11 +314,12 @@
                                                 >
                                             </div>
                                             <div class="form-group">
-                                                <label for="weight">Khối lượng</label>
-                                                <input type="text" class="form-control @error('weight') is-invalid @enderror"
+                                                <label for="weight">Khối lượng(kg)<span class="product-require">*</span></label>
+                                                <input type="text"
+                                                       class="form-control @error('weight') is-invalid @enderror"
                                                        id="weight" name="weight"
                                                        placeholder="Nhập thông tin khối lượng"
-                                                       value="{{ $product->attribute->weight }}"
+                                                       value="{{ $product->weight }}"
                                                 >
                                                 @error('weight')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -271,7 +328,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="quantity">Số lượng</label>
+                                                <label for="quantity">Số lượng<span class="product-require">*</span></label>
                                                 <input type="number"
                                                        class="form-control @error('quantity') is-invalid @enderror"
                                                        id="quantity" name="quantity"
@@ -282,23 +339,85 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
+                                            <div class="form-group">
+                                                <label for="quantity">Chiều dài(cm)<span
+                                                 $       class="product-require">*</span></label>
+                                                <input type="number"
+                                                       class="form-control @error('length') is-invalid @enderror"
+                                                       id="length" name="length"
+                                                       placeholder="Nhập thông tin chiều dài (cm)"
+                                                       value="{{ $product->length }}"
+                                                >
+                                                @error('length')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
                                         </div>
                                         <div class="col-md-6">
-
                                             <div class="form-group">
-                                                <label for="who_made">Năm sản xuất</label>
-                                                <select name="when_made" id="when_made"
-                                                        class="form-select @error('when_made') is-invalid @enderror">
-                                                    <option value="">Hãy chọn thời gian sản xuất</option>
-                                                    <option value="2020_2022" @if($product->when_made == '2020_2022') selected @endif>2020-2022</option>
-                                                    <option value="2010_2019" @if($product->when_made == '2010_2019') selected @endif>2010-2019</option>
-                                                    <option value="2003_2009" @if($product->when_made == '2003_2009') selected @endif>2003-2009</option>
-                                                    <option value="before_2003" @if($product->when_made == 'before_2003') selected @endif>Trước 2003</option>
-                                                    <option value="2000_2002" @if($product->when_made == '2000_2002') selected @endif>2000-2002</option>
+                                                <label for="quantity">Chiều cao(cm)<span class="product-require">*</span></label>
+                                                <input type="number"
+                                                       class="form-control @error('height') is-invalid @enderror"
+                                                       id="height" name="height"
+                                                       placeholder="Nhập thông tin chiều cao"
+                                                       value="{{ $product->height }}"
+                                                >
+                                                @error('height')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="quantity">Chiều rộng(cm)<span
+                                                        class="product-require">*</span></label>
+                                                <input type="number"
+                                                       class="form-control @error('width') is-invalid @enderror"
+                                                       id="width" name="width"
+                                                       placeholder="Nhập thông tin chiều rộng (cm)"
+                                                       value="{{ $product->width }}"
+                                                >
+                                                @error('width')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                </div>
+                                <div class="tab-pane fade" id="delivery-warranty" role="tabpanel"
+                                     aria-labelledby="nav-delivery-warranty-tab">
+                                    <div><p>(<span class="product-require">*</span>) Bắt buộc</p></div>
 
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="delivery">Vận chuyện<span
+                                                        class="product-require">*</span></label>
+                                                <select class="form-control @error('delivery') is-invalid @enderror"
+                                                        id="delivery" name="delivery" required>
+                                                    <option value="0" @if($product->delivery == 0) selected @endif>Không</option>
+                                                    {{--                                                    <option value="1">Có</option>--}}
                                                 </select>
-                                                @error('when_made')
+                                                <div class="form-text">Chọn "Không" nếu vận chuyển bởi lazada</div>
+                                                @error('delivery')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                                {{--                                                <div class="form-text">Chọn "Có" nếu vận chuyển bởi người bán hàng</div>--}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="warranty_type">Bảo hành<span
+                                                        class="product-require">*</span></label>
+                                                <select class="form-control @error('warranty') is-invalid @enderror"
+                                                        id="warranty_type" name="warranty" required>
+                                                    <option value="">Lựa chọn phương thức bảo hành</option>
+                                                    <option value="No Warranty" @if($product->warranty == 'No Warranty') selected @endif>Không bảo hành</option>
+                                                    <option value="Invoice" @if($product->warranty == 'Invoice') selected @endif>Bảo hành bằng hóa đơn</option>
+                                                    <option value="Warranty Stamp" @if($product->warranty == 'Warranty Stamp') selected @endif>Tem bảo hành</option>
+                                                    <option value="Electronic Warranty" @if($product->warranty == 'Electronic Warranty') selected @endif>Bảo hành điện tử</option>
+                                                </select>
+                                                @error('warranty')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>

@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddFrontendRegisterRequest;
 use App\Http\Requests\AddFrontendUserRequest;
+use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Slide;
 use App\Models\User;
 use Dropbox\Exception;
 use Gloudemans\Shoppingcart\Cart;
+use HoangPhi\VietnamMap\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,10 +30,12 @@ class FrontendController extends FrontendBaseController
     private $cart;
     private $customer;
     private $user;
-    public function __construct(Category $category,Slide $slide,Product $product,Cart $cart,Customer $customer,User $user)
+    private $brand;
+    public function __construct(Category $category,Slide $slide,Product $product,Cart $cart,Customer $customer,User $user,Brand $brand)
     {
-        parent::__construct( $category,$product);
+        parent::__construct( $category,$product,$brand);
         $this->category = $category;
+        $this->brand = $brand;
         $this->slide = $slide;
         $this->product = $product;
         $this->cart = $cart;
@@ -41,15 +46,17 @@ class FrontendController extends FrontendBaseController
     public function index(){
         $slides = $this->slide->where('display','=',1)->take(4)->get();
         $productNews = $this->product->latest()->get();
+        $categoryWithProducts = Category::leaves();
 
-        return view('frontend.index',compact('slides','productNews'));
+
+        return view('frontend.index',compact('slides','productNews','categoryWithProducts'));
     }
 
     //display all product
-    public function shop(Request $request){
+    public function shop(){
 
-        $limit = request()->get('limit');
-        $products = $this->product->paginate($limit);
+
+        $products = $this->product->paginate(16);
 
         return view('frontend.shop',compact('products'));
     }
@@ -86,6 +93,7 @@ class FrontendController extends FrontendBaseController
     }
     public function logoutCustomer(){
         Auth::logout();
+        \session()->flush();
         return redirect('/');
     }
 
@@ -122,6 +130,59 @@ class FrontendController extends FrontendBaseController
     public function product($id){
         $productItem = $this->product->find($id);
         $product = $this->product->get();
-        return view('frontend.item',compact('product','productItem'));
+        $comments = Comment::where('product_id',$id)->get();
+
+        return view('frontend.item',compact('product','productItem','comments'));
+    }
+
+    public function privacy_policy(){
+        return view('frontend.pages.privacy-policy');
+    }
+    public function faq(){
+        return view('frontend.pages.faq');
+    }
+    public function about(){
+        return view('frontend.pages.about');
+    }
+
+    public function contact(){
+        return view('frontend.pages.contact');
+    }
+
+    public function terms_conditions(){
+        return view('frontend.pages.terms-conditions');
+
+    }
+
+    public function getSearch(Request $request){
+        $keyword = $request->keyword;
+        $products = $this->product->where('name','like',"%{$keyword}%")->paginate(16);
+        return view('frontend.search',compact('keyword','products'));
+    }
+
+    public function account(){
+        return view('frontend.account');
+    }
+
+    public function accountPassword(){
+        return view('frontend.account_password');
+    }
+
+    public function accountInfo(){
+        $id = Auth::user()->id;
+        $email = Auth::user()->email;
+        $customer = $this->customer->where('user_id',$id)->first();
+
+        return view('frontend.account_info',compact('customer','email'));
+    }
+
+    public function accountAddress(){
+
+        $id = Auth::user()->id;
+        $provinces = Province::all();
+
+        $customer = $this->customer->where('user_id',$id)->first();
+
+        return view('frontend.account_address',compact('customer','provinces'));
     }
 }

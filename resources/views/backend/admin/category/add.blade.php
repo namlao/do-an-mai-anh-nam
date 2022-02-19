@@ -18,21 +18,32 @@
                             @csrf
                             <div class="form-group">
                                 <label for="basicInput">Tên chuyên mục</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                                       name="name"
                                        placeholder="Nhập tên chuyên mục" value="{{ old('name') }}">
                                 @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+
                             <div class="form-group">
-                            <label for="basicInput">Chuyên mục cha</label>
-                            <select class="form-select" id="parent_id" name="parent_id">
-                                <option value="">Chọn chuyện mục</option>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
+                                <label for="basicInput">Tên thể loại</label>
+                                <select class="form-select" id="lazshop_cate_id" name="lazshop_cate_id">
+                                    <option value="">Chọn thể loại</option>
+                                    {{ \App\Helpers\RecursiveCategory::recursuveCategory($cateLzd)   }}
+                                </select>
                             </div>
+                            <div class="form-group">
+                                <label for="basicInput">Chuyên mục cha</label>
+                                <select class="form-select" id="parent_id" name="parent_id">
+                                    <option value="">Chọn chuyện mục</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Gửi</button>
                             </div>

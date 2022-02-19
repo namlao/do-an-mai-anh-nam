@@ -34,8 +34,10 @@ class UserController extends Controller
     public function index()
     {
         //
+//        $user = $this->user->find(1);
+//        $role = Role::find(1);
+//        $user->assignRole($role);
         $users = $this->user->get();
-
         return view('backend.admin.user.index', compact('users'));
 
     }

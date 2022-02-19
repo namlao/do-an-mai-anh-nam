@@ -30,6 +30,15 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+
+                            <div class="form-group">
+                                <label for="basicInput">Tên thể loại</label>
+                                <select class="form-select" id="lazshop_cate_id" name="lazshop_cate_id">
+                                    <option value="">Chọn thể loại</option>
+                                    {{ \App\Helpers\RecursiveCategory::recursuveEditCategory($cateLzd,$categoryItem->lzd_category_id)   }}
+                                </select>
+                            </div>
+
                             <div class="form-group">
                             <label for="basicInput">Chuyên mục cha</label>
                             <select class="form-select" id="parent_id" name="parent_id">
@@ -39,6 +48,8 @@
                                 @endforeach
                             </select>
                             </div>
+
+
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Gửi</button>
                             </div>

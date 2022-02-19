@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use App\Models\BillDetail;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Product;
@@ -27,11 +28,12 @@ class ShoppingCartController extends FrontendBaseController
     private $user;
     private $bill;
     private $billDetail;
+    private $brand;
 
-    public function __construct(Category $category,Cart $cart,Product $product,Customer $customer,User $user,Bill $bill, BillDetail $billDetail)
+    public function __construct(Category $category,Cart $cart,Product $product,Customer $customer,User $user,Bill $bill, BillDetail $billDetail,Brand $brand)
     {
-        parent::__construct($category,$product);
-//        $this->product = $product;
+        parent::__construct($category,$product,$brand);
+        $this->brand = $brand;
         $this->cart = $cart;
         $this->product = $product;
         $this->customer = $customer;
@@ -53,7 +55,7 @@ class ShoppingCartController extends FrontendBaseController
                 'name' => $product->name,
                 'qty' => 1,
                 'price' => $product->price,
-                'weight' => $product->attribute->weight,
+                'weight' => $product->weight,
                 'options' =>
                     [
                         'size' => 'large',
@@ -63,7 +65,7 @@ class ShoppingCartController extends FrontendBaseController
             ]
         );
 //        dd($this->cart->content());
-        return back();
+        return redirect()->back();
     }
 
     public function update(Request $request)
@@ -92,7 +94,8 @@ class ShoppingCartController extends FrontendBaseController
             $provinces = Province::all();
 
             $cart = $this->cart->content();
-            return view('frontend.checkout',compact('customer','user','provinces','cart'));
+            $cartCount = $this->cart->count();
+            return view('frontend.checkout',compact('customer','user','provinces','cart','cartCount'));
 
         }
         $provinces = Province::all();
@@ -167,5 +170,6 @@ class ShoppingCartController extends FrontendBaseController
     public function success(){
         return view('frontend.pages.checkout-suscess');
     }
+
 
 }

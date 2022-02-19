@@ -88,7 +88,13 @@
                                             <strong>{{ $content->price*$content->qty }} <span>VND</span></strong>
                                         </td>
                                         <td class="del-goods-col">
-                                            <a class="del-goods" href="{{ route('cart.remove',['rowId'=>$key]) }}" >&nbsp;</a>
+{{--                                            <a class="del-goods" href="{{ route('cart.remove',['rowId'=>$key]) }}" >&nbsp;</a>--}}
+                                            <form action="{{ route('cart.remove',['rowId' => $key]) }}"
+                                                  class="delete-form" method="post">
+                                                @csrf
+                                                @method('post')
+                                                <button class="del-goods" style="border: none"></button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -114,7 +120,7 @@
                         </div>
                         <a class="btn btn-default" href="{{ route('index') }}">Tiếp tục mua <i
                                 class="fa fa-shopping-cart"></i></a>
-                        <button class="btn btn-primary" type="submit">Checkout <i class="fa fa-check"></i></button>
+                        <a class="btn btn-primary" href="{{ route('cart.checkout') }}">Thanh toán <i class="fa fa-check"></i></a>
                     </div>
                     @else
                         <div class="shopping-cart-page">

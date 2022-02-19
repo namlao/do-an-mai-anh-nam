@@ -6,14 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddCategoryRequest;
 use App\Http\Requests\EditCategoryRequest;
 use App\Models\Category;
+use App\Models\LazadaShop;
+use App\Models\User;
+use App\Traits\LazadaTraits;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Lazada\UrlConstants;
+use function PHPUnit\Framework\isNull;
 
 class CategoryController extends Controller
 {
     private $category;
+    use LazadaTraits;
     public function __construct(Category $category)
     {
         $this->middleware('auth');
@@ -41,10 +48,27 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        $shop = User::find(Auth::user()->id)->lazadaShop;
+        if (!isNull($shop)){
+            return redirect('admin/lazada/authorize');
+        }
+        $categoryLzd  = LazadaTraits::callApi(
+            UrlConstants::$api_gateway_url_vn,
+            $shop->appkey,
+            $shop->appsecret,
+            '/category/tree/get',
+            'GET',
+            ['language_code'=>'en_US']
+        );
+        $cateLzd = [$categoryLzd['data'][6],$categoryLzd['data'][18],$categoryLzd['data'][39]];
+//        dd($cateLzd);
+//         dd($cateLzd[0]['children'][0]['children']);
+//         dd($cateLzd[1]['children'][0]['children']);
+//         dd($cateLzd[2]['children'][0]['children']);
         $categories = $this->category
             ->with('ancestors')
             ->get();
-        return view('backend.admin.category.add',compact('categories'));
+        return view('backend.admin.category.add',compact('categories','cateLzd'));
     }
 
     /**
@@ -55,11 +79,13 @@ class CategoryController extends Controller
      */
     public function store(AddCategoryRequest $request)
     {
+//        dd($request->all());
         try {
             DB::beginTransaction();
             $category = $this->category->create([
                 'name' => $request->name,
                 'slug'=> Str::slug($request->name),
+                'lzd_category_id' => $request->lazshop_cate_id,
             ]);
             if ($request->parent_id){
                 $node = $this->category->find($request->parent_id);
@@ -94,10 +120,24 @@ class CategoryController extends Controller
     public function edit($id)
     {
         //
+        $shop = User::find(Auth::user()->id)->lazadaShop;
+        if (!isNull($shop)){
+            return redirect('admin/lazada/authorize');
+        }
+        $categoryLzd  = LazadaTraits::callApi(
+            UrlConstants::$api_gateway_url_vn,
+            $shop->appkey,
+            $shop->appsecret,
+            '/category/tree/get',
+            'GET',
+            ['language_code'=>'en_US']
+        );
+        $cateLzd = [$categoryLzd['data'][6],$categoryLzd['data'][18],$categoryLzd['data'][39]];
+
         $categoryItem = $this->category->find($id);
         $categories = $this->category
             ->get();
-        return view('backend.admin.category.edit',compact('categories','categoryItem'));
+        return view('backend.admin.category.edit',compact('categories','categoryItem','cateLzd'));
     }
 
     /**
@@ -114,7 +154,9 @@ class CategoryController extends Controller
         $data = [
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'parent_id' => $request->parent_id
+            'parent_id' => $request->parent_id,
+            'lzd_category_id' => $request->lazshop_cate_id,
+
         ];
         Category::find($id)->update($data);
         return redirect()->route('category.index');

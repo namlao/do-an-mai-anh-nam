@@ -23,10 +23,10 @@
                     <li>
                         @if(\Illuminate\Support\Facades\Auth::check() == 1)
                             Xin chào <a
-                                href="shop-account.html">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
+                                href="{{ route('customer.account') }}">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
                         @endif
                     </li>
-                    <li><a href="shop-wishlist.html">My Wishlist</a></li>
+{{--                    <li><a href="shop-wishlist.html">My Wishlist</a></li>--}}
                     <li><a href="{{ route('cart.checkout') }}">Thanh toán</a></li>
                     @if(\Illuminate\Support\Facades\Auth::check() == 1)
 {{--                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"--}}

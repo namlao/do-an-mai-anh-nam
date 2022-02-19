@@ -44,7 +44,7 @@
                             <div>
                                 <div class="product-item">
                                     <div class="pi-img-wrapper">
-                                        <img src="{{ $productNew->image_feature_path }}" class="img-responsive"
+                                        <img style="height: 100%" src="{{ $productNew->image_feature_path }}" class="img-responsive"
                                              alt="Berry Lace Dress">
                                         <div>
                                             <a href="{{ $productNew->image_feature_path }}"
@@ -77,7 +77,7 @@
                                             <div class="col-md-6 col-sm-6 col-xs-9">
                                                 {{--                                            <div class="sticker sticker-new"></div>--}}
 
-                                                <h2>{{$productNew->name}}</h2>
+                                                <h2 >{{$productNew->name}}</h2>
                                                 <div class="price-availability-block clearfix">
                                                     <div class="price">
                                                         <strong>{{ number_format($productNew->price, 0, ',', '.') }}
@@ -141,32 +141,33 @@
             <div class="row margin-bottom-40 ">
             {{--           @include('frontend.partials.sidebar')--}}
             <!-- BEGIN CONTENT -->
-                @foreach($categories as $category)
+                @foreach($categoryWithProducts as $category)
+                    @if(!is_null($category->product))
+
                     <div class="col-md-12 col-sm-12">
-                        <h2>{{ $category->name }}</h2>
+                        <h2 style="margin-top: 15px;margin-bottom: 15px">{{ $category->name }}</h2>
 
                         <div class="owl-carousel owl-carousel3">
-                            @foreach($category->children as $categoryChild)
-                                @foreach($categoryChild->product as $productItem)
+                                @foreach($category->product as $productItem)
 
                                     <div>
-                                <div class="product-item">
-                                    <div class="pi-img-wrapper">
-                                        <img src="{{ url($productItem->image_feature_path) }}" class="img-responsive product-img"
-                                             alt="Berry Lace Dress">
-                                        <div>
-                                            <a href="{{  url($productItem->image_feature_path) }}"
-                                               class="btn btn-default fancybox-button">Phóng to</a>
-                                            <a href="#product-pop-up-{{$productItem->id}}"
-                                               class="btn btn-default fancybox-fast-view">Xem</a>
+                                        <div class="product-item">
+                                            <div class="pi-img-wrapper">
+                                                <img height="100%" src="{{ url($productItem->image_feature_path) }}" class="img-responsive product-img"
+                                                     alt="Berry Lace Dress">
+                                                <div>
+                                                    <a href="{{  url($productItem->image_feature_path) }}"
+                                                       class="btn btn-default fancybox-button">Phóng to</a>
+                                                    <a href="#product-pop-up-{{$productItem->id}}"
+                                                       class="btn btn-default fancybox-fast-view">Xem</a>
+                                                </div>
+                                            </div>
+                                            <h3><a href="{{ route('item',['id'=>$productNew->id]) }}">{{ $productItem->name }}</a></h3>
+                                            <div class="pi-price">{{  number_format($productItem->price, 0, ',', '.')  }} VND</div>
+                                            <a href="{{ route('cart.add',['id'=>$productItem->id]) }}" class="btn btn-default add2cart">Thêm vào giỏ</a>
+                                            {{--                                    <div class="sticker sticker-new"></div>--}}
                                         </div>
-                                    </div>
-                                    <h3><a href="{{ route('item',['id'=>$productNew->id]) }}">{{ $productItem->name }}</a></h3>
-                                    <div class="pi-price">{{  number_format($productItem->price, 0, ',', '.')  }} VND</div>
-                                    <a href="{{ route('cart.add',['id'=>$productItem->id]) }}" class="btn btn-default add2cart">Thêm vào giỏ</a>
-{{--                                    <div class="sticker sticker-new"></div>--}}
-                                </div>
-                                 <div id="product-pop-up-{{$productItem->id}}" style="display: none; width: 700px;">
+                                        <div id="product-pop-up-{{$productItem->id}}" style="display: none; width: 700px;">
                                             <div class="product-page product-pop-up">
                                                 <div class="row">
                                                     <div class="col-md-6 col-sm-6 col-xs-3">
@@ -183,7 +184,7 @@
                                                     <div class="col-md-6 col-sm-6 col-xs-9">
                                                         {{--                                            <div class="sticker sticker-new"></div>--}}
 
-                                                        <h2>{{$productNew->name}}</h2>
+                                                        <h2 >{{$productNew->name}}</h2>
                                                         <div class="price-availability-block clearfix">
                                                             <div class="price">
                                                                 <strong>{{ number_format($productNew->price, 0, ',', '.') }}
@@ -234,12 +235,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                            </div>
+                                    </div>
                                 @endforeach
-                            @endforeach
                         </div>
                     </div>
-                @endforeach
+                @endif
+
+            @endforeach
             <!-- END CONTENT -->
             </div>
             <!-- END SIDEBAR & CONTENT -->

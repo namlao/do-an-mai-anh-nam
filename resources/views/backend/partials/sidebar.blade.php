@@ -74,6 +74,21 @@
 
                     </ul>
                 </li>
+                <li class="sidebar-item has-sub {{ request()->routeIs('brand.*')?'active':'' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fas fa-copyright"></i>
+                        <span>Thương hiệu</span>
+                    </a>
+                    <ul class="submenu {{ request()->routeIs('brand.*')?'active':'' }}">
+                        <li class="submenu-item {{ request()->routeIs('brand.index')?'active':'' }}">
+                            <a href="{{ route('brand.index') }}">Danh sách thương hiệu</a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('brand.create')?'active':'' }}">
+                            <a href="{{ route('brand.create') }}">Thêm thương hiệu</a>
+                        </li>
+
+                    </ul>
+                </li>
 
                 {{--                <li class="sidebar-item has-sub {{ request()->routeIs('storage.*')?'active':'' }}">--}}
                 {{--                    <a href="#" class='sidebar-link'>--}}
@@ -163,27 +178,28 @@
                 </li>
                 @endrole
 
+                @role('admin')
                 <li class="sidebar-title">Quản lý hóa dơn</li>
-{{--                <li class="sidebar-item {{ request()->routeIs('bill.*')?'active':'' }}">--}}
-{{--                    <a href="{{route('bill.customer') }}" class='sidebar-link'>--}}
-{{--                        <i class="bi bi-stack"></i>--}}
-{{--                        <span>Quản lý khách hàng</span>--}}
-{{--                    </a>--}}
+                {{--                <li class="sidebar-item {{ request()->routeIs('bill.*')?'active':'' }}">--}}
+                {{--                    <a href="{{route('bill.customer') }}" class='sidebar-link'>--}}
+                {{--                        <i class="bi bi-stack"></i>--}}
+                {{--                        <span>Quản lý khách hàng</span>--}}
+                {{--                    </a>--}}
 
-{{--                </li>--}}
+                {{--                </li>--}}
                 <li class="sidebar-item has-sub {{ request()->routeIs('bill.*')?'active':'' }}">
                     <a href="#" class='sidebar-link'>
                         <i class="fas fa-money-bill"></i>
                         <span>Quản lý hóa đơn</span>
                     </a>
                     <ul class="submenu {{ request()->routeIs('bill.*')?'active':'' }}">
-                            <li class="submenu-item {{ request()->routeIs('bill.index')?'active':'' }}">
-                                <a href="{{ route('bill.index') }}">Danh sách hóa đơn</a>
-                            </li>
+                        <li class="submenu-item {{ request()->routeIs('bill.index')?'active':'' }}">
+                            <a href="{{ route('bill.index') }}">Danh sách hóa đơn</a>
+                        </li>
                     </ul>
 
                 </li>
-
+                @endrole
                 @role('member-manager|admin|content')
                 <li class="sidebar-title">Quản lý người dùng</li>
                 <li class="sidebar-item has-sub {{ request()->routeIs('user.*')?'active':'' }}">
@@ -205,7 +221,18 @@
 
                     </ul>
                 </li>
+                <li class="sidebar-item has-sub {{ request()->routeIs('comment.*')?'active':'' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fas fa-comments"></i>
+                        <span>Bình luận</span>
+                    </a>
+                    <ul class="submenu {{ request()->routeIs('comment.*')?'active':'' }}">
+                        <li class="submenu-item {{ request()->routeIs('comment.index')?'active':'' }}">
+                            <a href="{{ route('comment.index') }}">Danh sách bình luận</a>
+                        </li>
 
+                    </ul>
+                </li>
 
                 @role('admin')
                 <li class="sidebar-item has-sub {{ request()->routeIs('role.*')?'active':'' }}">
@@ -231,7 +258,25 @@
                     </ul>
                 </li>
                 @endrole
+
+
                 @endrole
+                <li class="sidebar-title">Quản lý API</li>
+                <li class="sidebar-item has-sub {{ request()->routeIs('lazada.*')?'active':'' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Lazada</span>
+                    </a>
+                    <ul class="submenu {{ request()->routeIs('lazada.*')?'active':'' }}">
+                        <li class="submenu-item {{ request()->routeIs('lazada.authorize')?'active':'' }}">
+                            <a href="{{ route('lazada.authorize') }}">Authorize</a>
+                        </li>
+                        <li class="submenu-item {{ request()->routeIs('lazada.index')?'active':'' }}">
+                            <a href="{{ route('lazada.index') }}">Quản lý sản phẩm</a>
+                        </li>
+
+                    </ul>
+                </li>
                 <li class="sidebar-item">
                     <a href="{{ route('logout') }}" class='sidebar-link'
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

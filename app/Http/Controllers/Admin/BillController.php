@@ -18,6 +18,8 @@ class BillController extends Controller
     public function __construct(Bill $bill)
     {
         $this->bill = $bill;
+        $this->middleware('auth');
+        $this->middleware(['role:admin']);
     }
     /**
      * Display a listing of the resource.

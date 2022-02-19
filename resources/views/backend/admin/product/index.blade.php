@@ -17,12 +17,17 @@
     </script>
 @endsection
 @section('content')
-    @include('backend.partials.page-heading',['namepage'=>'Danh sách chuyên mục'])
+    @include('backend.partials.page-heading',['namepage'=>'Danh sách sản phẩm'])
 
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
                 <div class="row">
+                    @if (session('lazadaError'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('lazadaError') }}
+                        </div>
+                    @endif
                     <div class="col-md-12">
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
@@ -36,10 +41,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($products as $product)
+                            @foreach($products as $key => $product)
                                 <tr>
 
-                                    <td>{{$product->id}}</td>
+                                    <td>{{$key}}</td>
                                     <td>{{$product->name}}</td>
                                     <td>
                                         <div>
@@ -52,14 +57,18 @@
 {{--                                        <a href="{{ route('etsy.add',['id' => $product->id]) }}" class="btn btn-success"><i class="fab fa-etsy"></i></a>--}}
                                         @can('product edit')
                                             <a href="{{ route('product.edit',['product'=>$product->id]) }}"
-                                               class="btn btn-primary"><i class="fas fa-wrench"></i></a>
+                                               class="btn btn-primary mb-1"><i class="fas fa-wrench"></i></a><br>
                                         @endcan
+                                        @if(!$product->item_id || !$product->sku_id)
+                                            <a href="{{ route('product.sync',['product'=>$product->id]) }}"
+                                               class="btn btn-primary mb-1"><i class="fas fa-sync"></i></a><br>
+                                        @endif
                                         @can('product delete')
                                             <form action="{{ route('product.destroy',['product'=>$product->id]) }}"
                                                   method="POST" class="delete-form">
                                                 @csrf
                                                 {{ @method_field('DELETE') }}
-                                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                                <button class="btn btn-danger mb-1"><i class="fas fa-trash-alt"></i></button>
                                             </form>
                                         @endcan
                                     </td>

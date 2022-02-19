@@ -122,7 +122,7 @@
                                 <ul id="myTab" class="nav nav-tabs">
                                     <li class="active"><a href="#Description" data-toggle="tab">Mô tả chi tiết</a></li>
                                     <li><a href="#Information" data-toggle="tab">Thông tin</a></li>
-                                    <li><a href="#Reviews" data-toggle="tab">Reviews (2)</a></li>
+                                    <li><a href="#Reviews" data-toggle="tab">Đánh giá ({{ $comments->count() }})</a></li>
                                 </ul>
                                 <div id="myTabContent" class="tab-content">
                                     <div class="tab-pane fade in active" id="Description">
@@ -177,45 +177,48 @@
                                     </div>
                                     <div class="tab-pane fade" id="Reviews">
                                         <!--<p>There are no reviews for this product.</p>-->
+                                        @foreach($comments as $comment)
                                         <div class="review-item clearfix">
                                             <div class="review-item-submitted">
-                                                <strong>Bob</strong>
-                                                <em>30/12/2013 - 07:37</em>
-                                                <div class="rateit" data-rateit-value="5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                                <strong>{{ $comment->name }}</strong>
+                                                <em>{{ $comment->created_at }}</em>
+                                                <div class="rateit" data-rateit-value="{{ $comment->rate }}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                                             </div>
                                             <div class="review-item-content">
-                                                <p>Sed velit quam, auctor id semper a, hendrerit eget justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies tristique, enim mauris bibendum orci, a sodales lectus purus ut lorem.</p>
+                                                <p>{{ $comment->comment }}</p>
                                             </div>
                                         </div>
-                                        <div class="review-item clearfix">
-                                            <div class="review-item-submitted">
-                                                <strong>Mary</strong>
-                                                <em>13/12/2013 - 17:49</em>
-                                                <div class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                                            </div>
-                                            <div class="review-item-content">
-                                                <p>Sed velit quam, auctor id semper a, hendrerit eget justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies tristique, enim mauris bibendum orci, a sodales lectus purus ut lorem.</p>
-                                            </div>
-                                        </div>
+                                        @endforeach
+{{--                                        <div class="review-item clearfix">--}}
+{{--                                            <div class="review-item-submitted">--}}
+{{--                                                <strong>Mary</strong>--}}
+{{--                                                <em>13/12/2013 - 17:49</em>--}}
+{{--                                                <div class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="review-item-content">--}}
+{{--                                                <p>Sed velit quam, auctor id semper a, hendrerit eget justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies tristique, enim mauris bibendum orci, a sodales lectus purus ut lorem.</p>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
 
                                         <!-- BEGIN FORM-->
-                                        <form action="#" class="reviews-form" role="form">
-                                            <h2>Write a review</h2>
+                                        <form action="{{ route('comment.store',['id' => $productItem->id]) }}" class="reviews-form" role="form" method="post">
+                                            @csrf
+                                            <h2>Viết đánh giá</h2>
                                             <div class="form-group">
-                                                <label for="name">Name <span class="require">*</span></label>
-                                                <input type="text" class="form-control" id="name">
+                                                <label for="name">Tên <span class="require">*</span></label>
+                                                <input type="text" class="form-control" id="name" name="name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="email">Email</label>
-                                                <input type="text" class="form-control" id="email">
+                                                <input type="text" class="form-control" id="email" name="email">
                                             </div>
                                             <div class="form-group">
-                                                <label for="review">Review <span class="require">*</span></label>
-                                                <textarea class="form-control" rows="8" id="review"></textarea>
+                                                <label for="review">Đánh giá <span class="require">*</span></label>
+                                                <textarea class="form-control" rows="8" id="review" name="comment"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="email">Rating</label>
-                                                <input type="range" value="4" step="0.25" id="backing5">
+                                                <input type="range" value="4" step="0.25" id="backing5" name="rate">
                                                 <div class="rateit" data-rateit-backingfld="#backing5" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
                                                 </div>
                                             </div>

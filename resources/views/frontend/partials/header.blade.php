@@ -25,7 +25,12 @@
                             <span class="cart-content-count">x {{ $cart->qty}}</span>
                             <strong><a href="{{ route('item',['id' => $cart->id]) }}">{{ $cart->name }}</a></strong>
                             <em>{{ $cart->price }}</em>
-                            <a href="{{ route('cart.remove',['rowId' => $cart->rowId]) }}" class="del-goods">&nbsp;</a>
+                                <form action="{{ route('cart.remove',['rowId' => $cart->rowId]) }}"
+                                      class="delete-form" method="post">
+                                    @csrf
+                                    @method('post')
+                                    <button class="del-goods" style="border: none"></button>
+                                </form>
                         </li>
                         @endforeach
                     </ul>
@@ -48,34 +53,36 @@
             <ul>
                 <li><a href="{{url('')}}">Home</a></li>
                 <li><a href="{{route('shop')}}">Shop</a></li>
-                @foreach($categories as $category)
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">
-                            {{ $category->name }}
+{{--                @foreach($categories as $category)--}}
+{{--                    <li class="dropdown">--}}
+{{--                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">--}}
+{{--                            {{ $category->name }}--}}
 
-                        </a>
-                        <!-- BEGIN DROPDOWN MENU -->
-                        <ul class="dropdown-menu">
-                            @foreach($category->children as $cat_child)
-                                <li class="dropdown-submenu">
-                                    <a href="{{ route('category',['id'=>$cat_child->id]) }}">{{ $cat_child->name }} </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                        <!-- END DROPDOWN MENU -->
-                    </li>
-            @endforeach
+{{--                        </a>--}}
+{{--                        <!-- BEGIN DROPDOWN MENU -->--}}
+{{--                        <ul class="dropdown-menu">--}}
+{{--                            @foreach($category->children as $cat_child)--}}
+{{--                                <li class="dropdown-submenu">--}}
+{{--                                    <a href="{{ route('category',['id'=>$cat_child->id]) }}">{{ $cat_child->name }} </a>--}}
+{{--                                </li>--}}
+{{--                            @endforeach--}}
+{{--                        </ul>--}}
+{{--                        <!-- END DROPDOWN MENU -->--}}
+{{--                    </li>--}}
+{{--            @endforeach--}}
+                <li><a href="{{route('about')}}">Giới thiệu</a></li>
+                <li><a href="{{route('contact')}}">Liên hệ</a></li>
 
             <!-- BEGIN TOP SEARCH -->
                 <li class="menu-search">
                     <span class="sep"></span>
                     <i class="fa fa-search search-btn"></i>
                     <div class="search-box">
-                        <form action="#">
+                        <form action="{{ route('getSearch') }}" method="get">
                             <div class="input-group">
-                                <input type="text" placeholder="Search" class="form-control">
+                                <input type="text" placeholder="Nhập từ khóa" class="form-control" name="keyword">
                                 <span class="input-group-btn">
-                      <button class="btn btn-primary" type="submit">Search</button>
+                      <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                     </span>
                             </div>
                         </form>

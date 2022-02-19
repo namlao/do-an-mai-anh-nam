@@ -12,15 +12,17 @@
             <!-- END BOTTOM ABOUT BLOCK -->
             <!-- BEGIN BOTTOM INFO BLOCK -->
             <div class="col-md-4 col-sm-6 pre-footer-col">
-                <h2>Information</h2>
+                <h2>Thông tin trang</h2>
                 <ul class="list-unstyled">
-                    <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Delivery Information</a></li>
-                    <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Customer Service</a></li>
-                    <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Order Tracking</a></li>
-                    <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Shipping &amp; Returns</a></li>
-                    <li><i class="fa fa-angle-right"></i> <a href="contacts.html">Contact Us</a></li>
-                    <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Careers</a></li>
-                    <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Payment Methods</a></li>
+                    <li><i class="fa fa-angle-right"></i> <a href="{{ route('index') }}">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i> <a href="{{ route('shop') }}">Shop</a></li>
+                    <li><i class="fa fa-angle-right"></i> <a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
+                    <li><i class="fa fa-angle-right"></i> <a href="{{ route('terms-conditions') }}">Terms &amp; Conditions</a></li>
+                    <li><i class="fa fa-angle-right"></i> <a href="{{ route('faq') }}">FAQ</a></li>
+                    <li><i class="fa fa-angle-right"></i> <a href="{{ route('about') }}">About</a></li>
+                    <li><i class="fa fa-angle-right"></i> <a href="{{ route('contact') }}">Contact</a></li>
+{{--                    <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Careers</a></li>--}}
+{{--                    <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Payment Methods</a></li>--}}
                 </ul>
             </div>
             <!-- END INFO BLOCK -->

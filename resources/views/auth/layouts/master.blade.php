@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/pages/auth.css') }}">
+
 </head>
 
 <body>
@@ -25,7 +26,7 @@
             </div>
         </div>
         <div class="col-lg-7 d-none d-lg-block">
-            <div id="auth-right">
+            <div id="auth-right" style="background:url({{ asset('backend/assets/images/bg/bg-login.png')  }}) no-repeat center center">
 
             </div>
         </div>

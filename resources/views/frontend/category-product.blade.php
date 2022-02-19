@@ -27,19 +27,42 @@
             Layout.initUniform();
             Layout.initSliderRange();
         });
-        // function ajaxlimit(limit){
-        //     $.ajax({
-        //         url : "route('shop')",
-        //         type:get,
-        //         dataType:'json',
-        //         data:{
-        //
-        //         },
-        //         success: function (){
-        //
-        //         }
-        //     })
-        // }
+
+        ////ajax sort with category
+        $('#categorySort').on('change',function (e) {
+            console.log(e)
+            var sort = e.target.value;
+            // alert(sort)
+            $.get('/'+{{ $categoryId->id }}+'/categorySort/'+sort,function (data) {
+                $('#ajaxCategory').html(data)
+            });
+        })
+
+
+        ////ajax show category
+        $('#showCategory').on('change',function (e) {
+            console.log(e)
+            var show = e.target.value;
+            $.get('/'+{{ $categoryId->id }}+'/categoryShow/'+show,function (data) {
+                $('#ajaxCategory').html(data)
+            });
+        })
+
+        //ajax filter quantity category
+        $('.filter-stock').on('click',function (e) {
+            var filterShop = e.target.value;
+            $.get('/'+{{ $categoryId->id }}+'/filterStockCategory/'+filterShop,function (data) {
+                $('#ajaxCategory').html(data)
+            })
+        })
+
+        //filter price category
+        $('.filter-price').on('click',function (e) {
+            var filterShop = e.target.value;
+            $.get('/'+{{ $categoryId->id }}+'/filterPriceCategory/'+filterShop,function (data) {
+                $('#ajaxCategory').html(data)
+            })
+        })
     </script>
 @endsection
 
@@ -70,33 +93,32 @@
                     </div>
                     <div class="col-md-10 col-sm-10">
                         <div class="pull-right">
-                            <label class="control-label">Show:</label>
-                            <select class="form-control input-sm">
-                                <option value="#?limit=24" selected="selected">24</option>
-                                <option value="#?limit=25">25</option>
-                                <option value="#?limit=50">50</option>
-                                <option value="#?limit=75">75</option>
-                                <option value="#?limit=100">100</option>
+                            <label class="control-label">Hiển thị:</label>
+                            <select class="form-control input-sm" id="showCategory">
+                                <option value="">Chọn</option>
+                                <option value="2">2</option>
+                                <option value="16">16</option>
+                                <option value="32">32</option>
+                                <option value="48">48</option>
+                                <option value="64">64</option>
+                                <option value="80">80</option>
                             </select>
+                            <span>Sản phẩm</span>
                         </div>
                         <div class="pull-right">
-                            <label class="control-label">Sort&nbsp;By:</label>
-                            <select class="form-control input-sm">
-                                <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
-                                <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-                                <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                                <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-                                <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-                                <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
-                                <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
-                                <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
-                                <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
+                            <label class="control-label">Sắp xếp theo:</label>
+                            <select class="form-control input-sm" id="categorySort">
+                                <option value="" selected="selected">Chọn </option>
+                                <option value="name_asc">Name (A - Z)</option>
+                                <option value="name_desc">Name (Z - A)</option>
+                                <option value="price_asc">Price (Low &gt; High)</option>
+                                <option value="price_desc">Price (High &gt; Low)</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <!-- BEGIN PRODUCT LIST -->
-                <div class="row product-list">
+                <div class="row product-list" style="display: flex" id="ajaxCategory">
                     @foreach($products as $product)
                     <!-- PRODUCT ITEM START -->
                     <div class="col-md-4 col-sm-6 col-xs-12">

@@ -13,7 +13,15 @@
                     @foreach($category->children as$categorieChild )
                         <li class="dropdown-submenu">
                             <a href="{{ route('category',['id'=>$categorieChild->id]) }}">{{ $categorieChild->name }} </a>
+                            <ul>
+                                @foreach($categorieChild->children as $child)
+                                    <li class="dropdown-submenu">
+                                        <a href="{{ route('category',['id'=>$child->id]) }}">{{ $child->name }} </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </li>
+
                     @endforeach
                 </ul>
                 <!-- END DROPDOWN MENU -->
@@ -23,23 +31,26 @@
 
     </ul>
 
-    @if(!request()->routeIs('item'))
+    @if(!request()->routeIs('item') && !request()->routeIs('privacy-policy') && !request()->routeIs('faq') && !request()->routeIs('about')&& !request()->routeIs('contact') && !request()->routeIs('terms-conditions'))
     <div class="sidebar-filter margin-bottom-25">
         <h2>Lọc</h2>
         <h3>Tình trạng</h3>
         <div class="checkbox-list">
-            <label><input type="checkbox"> Hết hàng (3)</label>
-            <label><input type="checkbox"> Còn hàng (26)</label>
+            <label><input type="radio" name="status" class="filter-stock" value="="> Hết hàng ({{ $productOutOfStock }})</label>
+            <label><input type="radio" name="status" class="filter-stock" value=">"> Còn hàng ({{ $productInStock}})</label>
         </div>
 
         <h3>Giá</h3>
-        <p>
-            <label for="amount">Khoảng:</label>
-            <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
-        </p>
-        <div id="slider-range"></div>
+        <div class="checkbox-list">
+            <label><input type="radio" name="price" class="filter-price" value="<_5000000"> Dưới 5.000.000 VND</label>
+            <label><input type="radio" name="price" class="filter-price" value="5000000_<=_10000000"> 5.000.000 đến 10.000.000</label>
+            <label><input type="radio" name="price" class="filter-price" value="10000000_<=_50000000"> 10.000.000 đến 50.000.000</label>
+            <label><input type="radio" name="price" class="filter-price" value="50000000_<=_100000000"> 50.000.000 đến 100.000.000</label>
+            <label><input type="radio" name="price" class="filter-price" value=">_100000000"> Trên 100.000.000</label>
+        </div>
     </div>
     @endif
+    @if(!request()->routeIs('privacy-policy') && !request()->routeIs('faq') && !request()->routeIs('about') && !request()->routeIs('contact') && !request()->routeIs('terms-conditions') )
     <div class="sidebar-products clearfix">
         <h2>Mua nhiều nhất</h2>
         @foreach($productBestSeller as $item)
@@ -50,5 +61,6 @@
         </div>
         @endforeach
     </div>
+    @endif
 </div>
 <!-- END SIDEBAR -->
