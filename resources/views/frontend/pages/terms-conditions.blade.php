@@ -18,7 +18,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 <!-- Head BEGIN -->
 <head>
   <meta charset="utf-8">
-  <title>Frequently Asked Questions | Metronic Shop UI</title>
+  <title>Terms &amp; Conditions | Metronic Shop UI</title>
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -37,14 +37,14 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
   <link rel="shortcut icon" href="favicon.ico">
 
   <!-- Fonts START -->
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"> 
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
   <!-- Fonts END -->
 
-  <!-- Global styles START -->          
+  <!-- Global styles START -->
   <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Global styles END --> 
-   
+  <!-- Global styles END -->
+
   <!-- Page level plugin styles START -->
   <link href="assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
   <link href="assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
@@ -79,7 +79,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         </ul>
       </div>
     </div>
-    <!-- END BEGIN STYLE CUSTOMIZER --> 
+    <!-- END BEGIN STYLE CUSTOMIZER -->
 
     <!-- BEGIN TOP BAR -->
     <div class="pre-header">
@@ -120,7 +120,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 </div>
                 <!-- END TOP BAR MENU -->
             </div>
-        </div>        
+        </div>
     </div>
     <!-- END TOP BAR -->
 
@@ -138,7 +138,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             <a href="javascript:void(0);" class="top-cart-info-value">$1260</a>
           </div>
           <i class="fa fa-shopping-cart"></i>
-                        
+
           <div class="top-cart-content-wrapper">
             <div class="top-cart-content">
               <ul class="scroller" style="height: 250px;">
@@ -204,7 +204,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 <a href="shop-checkout.html" class="btn btn-primary">Checkout</a>
               </div>
             </div>
-          </div>            
+          </div>
         </div>
         <!--END CART -->
 
@@ -213,10 +213,10 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
           <ul>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                Woman 
-                
+                Woman
+
               </a>
-                
+
               <!-- BEGIN DROPDOWN MENU -->
               <ul class="dropdown-menu">
                 <li class="dropdown-submenu">
@@ -226,7 +226,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     <li><a href="shop-product-list.html">Second Level Link</a></li>
                     <li class="dropdown-submenu">
                       <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Second Level Link 
+                        Second Level Link
                         <i class="fa fa-angle-right"></i>
                       </a>
                       <ul class="dropdown-menu">
@@ -245,7 +245,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             <li class="dropdown dropdown-megamenu">
               <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                 Man
-                
+
               </a>
               <ul class="dropdown-menu">
                 <li>
@@ -309,7 +309,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             <li class="dropdown dropdown100 nav-catalogue">
               <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                 New
-                
+
               </a>
               <ul class="dropdown-menu">
                 <li>
@@ -362,10 +362,10 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             </li>
             <li class="dropdown active">
               <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                Pages 
-                
+                Pages
+
               </a>
-                
+
               <ul class="dropdown-menu">
                 <li><a href="shop-index.html">Home Default</a></li>
                 <li><a href="shop-index-header-fix.html">Home Header Fixed</a></li>
@@ -376,19 +376,19 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 <li><a href="shop-shopping-cart-null.html">Shopping Cart (Null Cart)</a></li>
                 <li><a href="shop-shopping-cart.html">Shopping Cart</a></li>
                 <li><a href="shop-checkout.html">Checkout</a></li>
-                <li><a href="shop-about.html">About</a></li>
-                <li><a href="shop-contacts.html">Contacts</a></li>
+                <li><a href="pages/about.blade.php">About</a></li>
+                <li><a href="pages/contact.blade.php">Contacts</a></li>
                 <li><a href="shop-account.html">My account</a></li>
                 <li><a href="shop-wishlist.html">My Wish List</a></li>
                 <li><a href="shop-goods-compare.html">Product Comparison</a></li>
                 <li><a href="shop-standart-forms.html">Standart Forms</a></li>
-                <li class="active"><a href="shop-faq.html">FAQ</a></li>
-                <li><a href="shop-privacy-policy.html">Privacy Policy</a></li>
-                <li><a href="shop-terms-conditions-page.html">Terms &amp; Conditions</a></li>
+                <li><a href="pages/faq.blade.php">FAQ</a></li>
+                <li><a href="pages/privacy-policy.blade.php">Privacy Policy</a></li>
+                <li class="active"><a href="shop-terms-conditions-page.html">Terms &amp; Conditions</a></li>
               </ul>
             </li>
-            
-            
+
+
             <li><a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes&amp;utm_source=download&amp;utm_medium=banner&amp;utm_campaign=metronic_frontend_freebie" target="_blank">Admin theme</a></li>
 
             <!-- BEGIN TOP SEARCH -->
@@ -404,7 +404,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     </span>
                   </div>
                 </form>
-              </div> 
+              </div>
             </li>
             <!-- END TOP SEARCH -->
           </ul>
@@ -419,7 +419,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <ul class="breadcrumb">
             <li><a href="index.html">Home</a></li>
             <li><a href="">Store</a></li>
-            <li class="active">Frequently Asked Questions</li>
+            <li class="active">Terms &amp; Conditions</li>
         </ul>
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
@@ -439,108 +439,29 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
           <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-9">
-            <h1>Frequently Asked Questions</h1>
-            <div class="faq-page">
-                            <div class="panel panel-default">
-                               <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_1">
-                                     1. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry ?
-                                     </a>
-                                  </h4>
-                               </div>
-                               <div id="accordion1_1" class="panel-collapse collapse  in">
-                                  <div class="panel-body">
-                                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                  </div>
-                               </div>
-                            </div>
-                            <div class="panel panel-default">
-                               <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_2">
-                                     2. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry ?
-                                     </a>
-                                  </h4>
-                               </div>
-                               <div id="accordion1_2" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                     Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch   et.
-                                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                  </div>
-                               </div>
-                            </div>
-                            <div class="panel panel-success">
-                               <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_3">
-                                     3. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor ?
-                                     </a>
-                                  </h4>
-                               </div>
-                               <div id="accordion1_3" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                     Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch   et.
-                                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                  </div>
-                               </div>
-                            </div>
-                            <div class="panel panel-warning">
-                               <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_4">
-                                     4. Wolf moon officia aute, non cupidatat skateboard dolor brunch ?
-                                     </a>
-                                  </h4>
-                               </div>
-                               <div id="accordion1_4" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                     3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                  </div>
-                               </div>
-                            </div>
-                            <div class="panel panel-danger">
-                               <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_5">
-                                     5. Leggings occaecat craft beer farm-to-table, raw denim aesthetic ?
-                                     </a>
-                                  </h4>
-                               </div>
-                               <div id="accordion1_5" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                     3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et
-                                  </div>
-                               </div>
-                            </div>
-                            <div class="panel panel-default">
-                               <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_6">
-                                     6. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth ?
-                                     </a>
-                                  </h4>
-                               </div>
-                               <div id="accordion1_6" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                     3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et
-                                  </div>
-                               </div>
-                            </div>
-                            <div class="panel panel-default">
-                               <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_7">
-                                     7. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft ?
-                                     </a>
-                                  </h4>
-                               </div>
-                               <div id="accordion1_7" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                     3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et
-                                  </div>
-                               </div>
-                            </div>
+            <h1>Terms & Conditions</h1>
+            <div class="content-page">
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+
+              <h2>Lorem ipsum dolor sit amet</h2>
+
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. </p>
+
+              <h3>Investigationes demonstraverunt</h3>
+              <ul>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>Claritas est etiam processus dynamicus</li>
+                <li>Duis autem vel eum iriure dolor</li>
+                <li>Eodem modo typi</li>
+              </ul>
+
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+
+              <h2>Nam liber tempor cum soluta nobis</h2>
+
+              <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
             </div>
           </div>
           <!-- END CONTENT -->
@@ -620,7 +541,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
               <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Delivery Information</a></li>
               <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Customer Service</a></li>
               <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Order Tracking</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Shipping &amp; Returns</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Shipping & Returns</a></li>
               <li><i class="fa fa-angle-right"></i> <a href="contacts.html">Contact Us</a></li>
               <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Careers</a></li>
               <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Payment Methods</a></li>
@@ -628,13 +549,13 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
           </div>
           <!-- END INFO BLOCK -->
 
-          <!-- BEGIN TWITTER BLOCK --> 
+          <!-- BEGIN TWITTER BLOCK -->
           <div class="col-md-3 col-sm-6 pre-footer-col">
             <h2 class="margin-bottom-0">Latest Tweets</h2>
-            <a class="twitter-timeline" href="https://twitter.com/twitterapi" data-tweet-limit="2" data-theme="dark" data-link-color="#57C8EB" data-widget-id="455411516829736961" data-chrome="noheader nofooter noscrollbar noborders transparent">Loading tweets by @keenthemes...</a>      
+            <a class="twitter-timeline" href="https://twitter.com/twitterapi" data-tweet-limit="2" data-theme="dark" data-link-color="#57C8EB" data-widget-id="455411516829736961" data-chrome="noheader nofooter noscrollbar noborders transparent">Loading tweets by @keenthemes...</a>
           </div>
           <!-- END TWITTER BLOCK -->
-          
+
           <!-- BEGIN BOTTOM CONTACTS -->
           <div class="col-md-3 col-sm-6 pre-footer-col">
             <h2>Our Contacts</h2>
@@ -677,7 +598,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                   </span>
                 </div>
               </form>
-            </div> 
+            </div>
           </div>
           <!-- END NEWLETTER -->
         </div>
@@ -691,7 +612,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <div class="row">
           <!-- BEGIN COPYRIGHT -->
           <div class="col-md-4 col-sm-4 padding-top-10">
-            2015 © Keenthemes. ALL Rights Reserved. 
+            2015 © Keenthemes. ALL Rights Reserved.
           </div>
           <!-- END COPYRIGHT -->
           <!-- BEGIN PAYMENTS -->
@@ -718,11 +639,11 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
     <!-- Load javascripts at bottom, this will reduce page load time -->
     <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
     <!--[if lt IE 9]>
-    <script src="assets/plugins/respond.min.js"></script>  
-    <![endif]-->  
+    <script src="assets/plugins/respond.min.js"></script>
+    <![endif]-->
     <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
@@ -734,7 +655,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
     <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
-            Layout.init();    
+            Layout.init();
             Layout.initOWL();
             Layout.initTwitter();
         });
